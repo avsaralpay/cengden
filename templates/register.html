@@ -58,6 +58,12 @@
             text-align: center;
             margin-top: 20px;
         }
+
+        .error {
+            color: red;
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
@@ -67,7 +73,11 @@
         <h1>Register to CENGden</h1>
         <p>Please fill in this form to create an account.</p>
         <hr>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
 
+        
         <label for="email"><b>Email</b></label>
         <input type="text" placeholder="eXXXXXXX@ceng.metu.edu.tr should be used" name="email" id="email" required>
 

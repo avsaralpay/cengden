@@ -43,7 +43,8 @@ def register():
         users = mongo.db.users
         existing_user = users.find_one({'email' : request.form['email']})
         if not request.form['email'].endswith('@ceng.metu.edu.tr'):
-            return 'Registration is only allowed for CENG emails.'
+            error_message = 'Registration is only allowed for CENG emails.'
+            return render_template('register.html',error=error_message)
 
         if existing_user is None:
             hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
@@ -63,7 +64,8 @@ def register():
             session['email'] = request.form['email']  # Consider using a more specific session key
             return redirect(url_for('index'))
         
-        return 'That email already exists!'
+        error_message = 'That email already exists!'
+        return render_template('register.html',error=error_message)
 
     return render_template('register.html')
 
