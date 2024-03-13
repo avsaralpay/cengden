@@ -39,7 +39,9 @@ def register():
             users.insert({'name' : request.form['username'], 'password' : hashpass})
             session['username'] = request.form['username']
             return redirect(url_for('index'))
-        
+        return 'That username already exists!'
+    return render_template('register.html')
+
 if __name__ == "__main__":
     app.secret_key = 'secret_key'
     app.run(debug=True)
