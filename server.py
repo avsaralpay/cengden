@@ -40,11 +40,11 @@ def register():
         if existing_user is None:
             hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
             # Store additional details
-            print(request.form['email']
-                  , request.form['name']
-                  , request.form['phone']
-                  , hashpass
-                  , 'authenticated_user')
+            print(request.form['email'])
+            print(request.form['password'])
+            print(request.form['name'])
+            print(request.form['phone'])
+            
             
             users.insert({
                 'email': request.form['email'],
@@ -53,7 +53,7 @@ def register():
                 'phone': request.form['phone'],
                 'role': 'authenticated_user'  # Assign a default role
             })
-            
+
             session['email'] = request.form['email']  # Consider using a more specific session key
             print("ok")
             return redirect(url_for('index'))
