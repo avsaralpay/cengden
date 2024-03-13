@@ -23,7 +23,7 @@ def login():
     login_user = users.find_one({'email' : request.form['email']})
 
     if login_user:
-        if bcrypt.hashpw(request.form['pass'].encode('utf-8'),login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
+        if bcrypt.checkpw(request.form['pass'].encode('utf-8'), login_user['password']):
             session['email'] = request.form['email']
             return redirect(url_for('index'))
     return 'Invalid username/password combination'
@@ -33,9 +33,8 @@ def register():
     if request.method == 'POST':
         print(request.form)  # Log the form data for debugging
         users = mongo.db.users
-        print(users)
         existing_user = users.find_one({'email' : request.form['email']})
-
+        print(existing_user)
         if not request.form['email'].endswith('@ceng.metu.edu.tr'):
             return 'Registration is only allowed for CENG emails.'
 
@@ -46,9 +45,11 @@ def register():
                 'email': request.form['email'],
                 'password': hashpass,
                 'name': request.form['name'],
-                'phone': request.form['phone']
+                'phone': request.form['phone'],
+                'role': 'authenticated_user'  # Assign a default role
             })
             session['email'] = request.form['email']  # Consider using a more specific session key
+            print("ok")
             return redirect(url_for('index'))
         
         return 'That email already exists!'
