@@ -19,3 +19,15 @@ def index():
 if __name__ == "__main__":
     app.secret_key = "secret_key"
     app.run(debug=True)
+
+
+@app.route('/login',methods=['POST'])
+def login():
+
+    users = mongo.db.users
+    login_user = users.find_one({'name' : request.form['username']})
+
+    if login_user:
+        if bcrypt.hashpw(request.form['pass'].encode('utf-8'),login_user['password'].encode('utf-8')) == login_user['password']encode('utf-8'):
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))

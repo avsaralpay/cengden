@@ -28,7 +28,7 @@
             list-style-type: none;
             padding: 0;
             margin: 0;
-            text-align: left; /* Left align menu */
+            text-align: center; /* Center align menu */
         }
 
         .menu li {
@@ -44,6 +44,18 @@
             bottom: 0;
             width: 100%;
         }
+
+        .login-register {
+            float: right;
+        }
+
+        .latest-items {
+            text-align: left; /* Align items list to the left */
+        }
+
+        .categories {
+            text-align: left; /* Align categories list to the left */
+        }
     </style>
 </head>
 <body>
@@ -54,23 +66,29 @@
     <div class="container">
         <div class="menu">
             <ul>
-                <li>Vehicles</li>
-                <li>Computers</li>
-                <li>Phones</li>
-                <li>Private Lessons</li>
+                <li><a href="#">Vehicles</a></li>
+                <li><a href="#">Computers</a></li>
+                <li><a href="#">Phones</a></li>
+                <li><a href="#">Private Lessons</a></li>
             </ul>
         </div>
 
         <h2>Latest Items</h2>
-        <!-- Insert code for latest items here -->
-        
-        <h2>Categories</h2>
-        <!-- Insert code for categories here -->
+        <div class="latest-items">
+            <!-- Insert code for latest items here -->
+        </div>
 
-        <ul class="menu">
-            <li><a href="#">Register</a></li>
-            <li><a href="#">Login</a></li>
-        </ul>
+        <h2>Categories</h2>
+        <div class="categories">
+            <!-- Insert code for categories here -->
+        </div>
+
+        <div class="login-register">
+            <ul class="menu">
+                <li><a href="#">Register</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </div>
     </div>
 
     <div class="footer">
