@@ -53,8 +53,8 @@ def register():
                 return 'An error occurred while registering the user.'
 
             session['email'] = request.form['email']  # Consider using a more specific session key
-            print("ok")
-            return redirect(url_for('index'))
+            return("registered successfully")
+            
         
         return 'That email already exists!'
 
