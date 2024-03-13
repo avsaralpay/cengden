@@ -33,6 +33,7 @@ def register():
     if request.method == 'POST':
         print(request.form)  # Log the form data for debugging
         users = mongo.db.users
+        print(users)
         existing_user = users.find_one({'email' : request.form['email']})
 
         if not request.form['email'].endswith('@ceng.metu.edu.tr'):
