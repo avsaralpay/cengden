@@ -31,6 +31,7 @@ def login():
 @app.route('/register',methods=['POST','GET'])
 def register():
     if request.method == 'POST':
+        print(request.form)  # Log the form data for debugging
         users = mongo.db.users
         existing_user = users.find_one({'email' : request.form['email']})
 
