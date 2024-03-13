@@ -34,13 +34,18 @@ def register():
         print(request.form)  # Log the form data for debugging
         users = mongo.db.users
         existing_user = users.find_one({'email' : request.form['email']})
-        print(existing_user)
         if not request.form['email'].endswith('@ceng.metu.edu.tr'):
             return 'Registration is only allowed for CENG emails.'
 
         if existing_user is None:
             hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
             # Store additional details
+            print(request.form['email']
+                  , request.form['name']
+                  , request.form['phone']
+                  , hashpass
+                  , 'authenticated_user')
+            
             users.insert({
                 'email': request.form['email'],
                 'password': hashpass,
@@ -48,6 +53,7 @@ def register():
                 'phone': request.form['phone'],
                 'role': 'authenticated_user'  # Assign a default role
             })
+            
             session['email'] = request.form['email']  # Consider using a more specific session key
             print("ok")
             return redirect(url_for('index'))
