@@ -38,13 +38,8 @@ def register():
             return 'Registration is only allowed for CENG emails.'
 
         if existing_user is None:
-            hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
+            hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
             # Store additional details
-            print(request.form['email'])
-            print(request.form['password'])
-            print(request.form['name'])
-            print(request.form['phone'])
-
             try:
                 print("try")
                 users.insert({
