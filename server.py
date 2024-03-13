@@ -7,7 +7,7 @@ import bcrypt
 
 app = Flask(__name__)
 app.config['MONGO_DBNAME'] = 'aavsaralpay'
-app.config['MONGO_URI'] = 'mongodb+srv://aavsaralpay:<Alpicik123.>@cluster0.khgwljs.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+app.config['MONGO_URI'] = 'mongodb+srv://aavsaralpay:<Alpicik123.>@cluster0.khgwljs.mongodb.net/'
 # Define your routes and other Flask configurations here
 
 mongo = PyMongo(app)
