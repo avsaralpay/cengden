@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to CENGden</title>
     <style>
-        body {
+         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -17,19 +17,38 @@
             background-color: #007bff;
             color: #fff;
             padding: 10px;
-            position: relative; /* Needed for absolute positioning of children */
+            position: relative; /* For positioning login/register */
         }
 
-        .menu {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            text-align: center; /* Center align menu */
+        .content-wrapper {
+            display: flex;
+            flex-direction: column; /* Stack content vertically */
+            align-items: center; /* Center-align the children */
         }
 
-        .menu li {
-            display: inline;
-            margin-right: 20px;
+
+    
+
+        .categories {
+            order: 1; /* Ensure categories come first in the visual order */
+            margin-top: 20px; /* Space from header */
+        }
+
+        .latest-items {
+            order: 2; /* Latest Items come after Categories */
+            width: 100%; /* Take full width to center content */
+            text-align: center;
+        }
+
+
+        .pagination {
+            order: 3;
+        }
+
+        .login-register {
+            position: absolute;
+            right: 10px;
+            top: 10px;
         }
 
         .footer {
@@ -39,28 +58,6 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-        }
-
-        .login-register {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-        }
-
-        .latest-items {
-            text-align: center; /* Center the latest items */
-            margin: 20px auto;
-        }
-
-        .categories {
-            text-align: left;
-            margin-right: 20px;
-            margin-top: 20px; /* Adjust as needed */
-        }
-
-        .pagination {
-            margin-top: 20px;
-            text-align: center; /* Center the pagination */
         }
     </style>
 </head>
