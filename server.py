@@ -37,7 +37,7 @@ def register():
         if not request.form['email'].endswith('@ceng.metu.edu.tr'):
             return 'Registration is only allowed for CENG emails.'
         
-         if existing_user is None:
+        if existing_user is None:
             hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
             # Store additional details
             users.insert_one({
