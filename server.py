@@ -43,12 +43,12 @@ def register():
             hashpass = bcrypt.hashpw(request.form['password'].encode('utf-8'), bcrypt.gensalt())
             # Store additional details
             users.insert_one({
-                'name': request.form['name'],
                 'email': request.form['email'],
                 'password': hashpass,
+                'name': request.form['name'],
                 'phone': request.form['phone']
             })
-            session['username'] = request.form['email']  # Consider using a more specific session key
+            session['email'] = request.form['email']  # Consider using a more specific session key
             return redirect(url_for('index'))
         
         return 'That email already exists!'
