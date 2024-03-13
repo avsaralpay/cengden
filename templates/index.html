@@ -5,103 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to CENGden</title>
     <style>
-         body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column; /* Organize content in a column for main layout */
-}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Stack content vertically */
+        }
 
-.header {
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between; /* Space between site title and login/register */
+            position: relative; /* For absolute positioning of categories */
+        }
 
-.header h1 {
-    margin: 0; /* Adjust according to your spacing preference */
-}
+        .header h1 {
+            margin: 0;
+        }
 
-.menu {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex; /* Align Register/Login horizontally */
-}
+        .menu, .categories-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column; /* Align links vertically */
+            position: absolute; /* Position categories absolutely */
+            top: 50px; /* Adjust based on actual height of your header */
+            right: 10px; /* Right align */
+        }
 
-.menu li {
-    margin-left: 20px; /* Space between Register and Login */
-}
+        .menu li, .categories-list li {
+            margin-bottom: 5px; /* Space between links */
+        }
 
-.content-wrapper {
-    display: flex;
-    flex-direction: column; /* Stack content vertically */
-    align-items: center; /* Center-align the children horizontally */
-    width: 100%; /* Ensure full width to allow centering */
-}
+        .latest-items {
+            text-align: center;
+            margin-top: 20px; /* Adjust spacing as needed */
+        }
 
-.latest-items {
-    width: 100%; /* Take full width to center content */
-    text-align: center;
-    margin-top: 20px; /* Space from the header */
-}
+        .pagination {
+            text-align: center;
+            margin-top: 10px;
+        }
 
-.pagination {
-    text-align: center;
-    padding: 10px 0; /* Add some padding above and below */
-}
-
-.categories {
-    text-align: left; /* Align text to the left for categories */
-    position: absolute; /* Position categories absolutely to place it on the left */
-    top: 100px; /* Adjust based on the actual height of your header */
-    left: 20px; /* Space from the left edge */
-}
-
-.footer {
-    background-color: #f8f9fa;
-    padding: 10px;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
+        .footer {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Welcome to CENGden</h1>
-        <div class="login-register">
+        <div>
             <ul class="menu">
                 <li><a href="#">Register</a></li>
                 <li><a href="#">Login</a></li>
             </ul>
+            <ul class="categories-list">
+                <li>Vehicles</li>
+                <li>Computers</li>
+                <li>Phones</li>
+                <li>Private Lessons</li>
+            </ul>
         </div>
     </div>
-
-    <h2>Latest Items</h2>
     <div class="latest-items">
-        <!-- Insert code for latest items here -->
+        <h2>Latest Items</h2>
+        <!-- Content for latest items here -->
     </div>
-
     <div class="pagination">
-        <a href="#">Previous</a>
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <!-- Add more page numbers as needed -->
-        <a href="#">Next</a>
+        <!-- Pagination links here -->
+        <a href="#">Previous</a> <a href="#">1</a> <a href="#">2</a> <a href="#">Next</a>
     </div>
-
-    <h2>Categories</h2>
-    <div class="categories">
-        <ul>
-            <li><a href="#">Vehicles</a></li>
-            <li><a href="#">Computers</a></li>
-            <li><a href="#">Phones</a></li>
-            <li><a href="#">Private Lessons</a></li>
-        </ul>
-    </div
+    <div class="footer">
+        <p>© 2024 CENGden. All rights reserved.</p>
+    </div>
+</body>
+</html>
