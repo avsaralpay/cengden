@@ -8,8 +8,6 @@
 <body>
     <h2>Register to CENGden</h2>
     <form action="/register" method="POST">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br>
         
         <label for="email">Email:</label><br>
         <input type="email" id="email" name="email" pattern=".+@ceng.metu.edu.tr" title="Please use your CENG email" required><br>
@@ -17,7 +15,10 @@
         <label for="pass">Password:</label><br>
         <input type="password" id="pass" name="pass" required><br>
         
-        <label for="phone">Phone Number (optional):</label><br>
+        <label for="name">Username:</label><br>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="phone">Phone Number:</label><br>
         <input type="tel" id="phone" name="phone"><br>
         
         <button type="submit">Register</button>
