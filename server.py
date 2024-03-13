@@ -44,15 +44,19 @@ def register():
             print(request.form['password'])
             print(request.form['name'])
             print(request.form['phone'])
-            
-            
-            users.insert({
-                'email': request.form['email'],
-                'password': hashpass,
-                'name': request.form['name'],
-                'phone': request.form['phone'],
-                'role': 'authenticated_user'  # Assign a default role
-            })
+
+            try:
+                print("try")
+                users.insert({
+                    'email': request.form['email'],
+                    'password': hashpass,
+                    'name': request.form['name'],
+                    'phone': request.form['phone'],
+                    'role': 'authenticated_user'  # Assign a default role
+                })
+            except Exception as e:
+                print(e)
+                return 'An error occurred while registering the user.'
 
             session['email'] = request.form['email']  # Consider using a more specific session key
             print("ok")
