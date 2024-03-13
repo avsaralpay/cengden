@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CENGden - Home</title>
-    <!-- Add your CSS link or styles here -->
+    <title>Welcome to CENGden</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,20 +15,20 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            text-align: center; /* Center align content */
         }
 
         .header {
             background-color: #007bff;
             color: #fff;
             padding: 10px;
-            text-align: center;
         }
 
         .menu {
             list-style-type: none;
             padding: 0;
             margin: 0;
-            text-align: center;
+            text-align: left; /* Left align menu */
         }
 
         .menu li {
@@ -48,54 +47,34 @@
     </style>
 </head>
 <body>
-    <header>
-        <!-- Add your header content here -->
+    <div class="header">
         <h1>Welcome to CENGden</h1>
-        <!-- Add navigation links or menu here -->
-        <nav>
+    </div>
+
+    <div class="container">
+        <div class="menu">
             <ul>
-                <li><a href="#latest-items">Latest Items</a></li>
-                <li><a href="#categories">Categories</a></li>
-                <!-- Add more navigation links as needed -->
+                <li>Vehicles</li>
+                <li>Computers</li>
+                <li>Phones</li>
+                <li>Private Lessons</li>
             </ul>
-        </nav>
-        <!-- Add register/login buttons -->
-        <div class="auth-buttons">
-            <button onclick="location.href='/register'" type="button">Register</button>
-            <button onclick="location.href='/login'" type="button">Login</button>
         </div>
-    </header>
-    
-    <main>
-        <section id="latest-items">
-            <h2>Latest Items</h2>
-            <!-- Display latest items here -->
-            <!-- Pagination links -->
-            <div class="pagination">
-                <a href="#">Previous</a>
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <!-- Add more page numbers as needed -->
-                <a href="#">Next</a>
-            </div>
-        </section>
 
-        <section id="categories">
-            <h2>Categories</h2>
-            <!-- Display categories and links to category items here -->
-            <ul>
-                <li><a href="#vehicles">Vehicles</a></li>
-                <li><a href="#computers">Computers</a></li>
-                <li><a href="#phones">Phones</a></li>
-                <li><a href="#private-lessons">Private Lessons</a></li>
-                <!-- Add more categories as needed -->
-            </ul>
-        </section>
-    </main>
+        <h2>Latest Items</h2>
+        <!-- Insert code for latest items here -->
+        
+        <h2>Categories</h2>
+        <!-- Insert code for categories here -->
 
-    <footer>
-        <!-- Add your footer content here -->
-        <p>&copy; 2024 CENGden. All rights reserved.</p>
-    </footer>
+        <ul class="menu">
+            <li><a href="#">Register</a></li>
+            <li><a href="#">Login</a></li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>© 2024 CENGden. All rights reserved.</p>
+    </div>
 </body>
 </html>
