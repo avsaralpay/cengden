@@ -47,14 +47,21 @@
 
         .login-register {
             float: right;
+            margin-top: 10px;
         }
 
         .latest-items {
             text-align: left; /* Align items list to the left */
+            margin-top: 20px;
         }
 
         .categories {
-            text-align: left; /* Align categories list to the left */
+            text-align: center; /* Align categories list to the center */
+            margin-bottom: 20px;
+        }
+
+        .pagination {
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -78,9 +85,22 @@
             <!-- Insert code for latest items here -->
         </div>
 
+        <div class="pagination">
+            <a href="#">Previous</a>
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <!-- Add more page numbers as needed -->
+                <a href="#">Next</a>
+        </div>
+
         <h2>Categories</h2>
         <div class="categories">
-            <!-- Insert code for categories here -->
+            <ul>
+                <li><a href="#">Vehicles</a></li>
+                <li><a href="#">Computers</a></li>
+                <li><a href="#">Phones</a></li>
+                <li><a href="#">Private Lessons</a></li>
+            </ul>
         </div>
 
         <div class="login-register">
