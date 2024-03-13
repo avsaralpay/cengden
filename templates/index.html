@@ -16,11 +16,12 @@
 
         .header {
             display: flex;
-            justify-content: center; /* Align items in the center */
+            justify-content: space-between; /* Adjusted to space-between to allocate space on both ends */
             align-items: center; /* Center items vertically */
             background-color: #007bff;
             color: #fff;
             padding: 10px;
+            position: relative;
         }
 
         .header-content {
@@ -40,27 +41,28 @@
             margin-left: 20px;
         }
 
+        .categories-label {
+            position: absolute;
+            top: 0px; /* Adjust based on your actual layout */
+            left: 10px;
+            color: #fff;
+            background-color: #007bff;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
         .categories-list {
             list-style-type: none;
             padding: 0;
             margin: 0;
             position: absolute;
             top: 100%;
-            right: 0;
+            left: 0;
             background-color: #007bff;
             padding: 10px;
             margin-top: 5px;
             border-radius: 5px;
-        }
-
-        .categories-label {
-            position: absolute;
-            top: 70px; /* Adjust based on your actual layout */
-            right: 10px;
-            color: #fff;
-            background-color: #007bff;
-            padding: 5px 10px;
-            border-radius: 5px;
+            width: max-content; /* Adjust width based on content */
         }
 
         .latest-items {
