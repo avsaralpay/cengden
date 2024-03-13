@@ -1,0 +1,93 @@
+
+Based on your registration form design, here's how you can implement a similar styled login form:
+
+login.html
+html
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CENGden</title>
+    <style>
+        * {box-sizing: border-box}
+
+        .container {
+            padding: 16px;
+            background-color: white;
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            background: #f1f1f1;
+        }
+
+        input[type=text]:focus, input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        .loginbtn {
+            background-color: #007bff;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        .loginbtn:hover {
+            opacity: 1;
+        }
+
+        a {
+            color: dodgerblue;
+        }
+
+        .signin {
+            background-color: #f1f1f1;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<form action="/login" method="POST">
+    <div class="container">
+        <h1>Login to CENGden</h1>
+        <p>Please enter your credentials to login.</p>
+        <hr>
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" id="email" required>
+
+        <label for="pass"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="pass" id="pass" required>
+        <hr>
+
+        <button type="submit" class="loginbtn">Login</button>
+    </div>
+
+    <div class="container signin">
+        <p>Don't have an account? <a href="/register">Sign up</a>.</p>
+    </div>
+</form>
+
+</body>
+</html>
