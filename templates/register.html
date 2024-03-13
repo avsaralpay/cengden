@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Registration Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - CENGden</title>
 </head>
 <body>
-    <h2>Registration Form</h2>
-
-    <form action="/submit_registration" method="post">
-        <label for="fname">First Name:</label><br>
-        <input type="text" id="fname" name="fname"><br>
-        <label for="lname">Last Name:</label><br>
-        <input type="text" id="lname" name="lname"><br>
+    <h2>Register to CENGden</h2>
+    <form action="/register" method="POST">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        
         <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br>
-        <input type="submit" value="Submit">
-    </form> 
-
+        <input type="email" id="email" name="email" pattern=".+@ceng.metu.edu.tr" title="Please use your CENG email" required><br>
+        
+        <label for="pass">Password:</label><br>
+        <input type="password" id="pass" name="pass" required><br>
+        
+        <label for="phone">Phone Number (optional):</label><br>
+        <input type="tel" id="phone" name="phone"><br>
+        
+        <button type="submit">Register</button>
+    </form>
 </body>
-</html></form>
+</html>
