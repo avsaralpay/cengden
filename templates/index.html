@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to CENGden</title>
     <style>
-        body {
+        .body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -19,26 +19,35 @@
             padding: 10px;
             display: flex;
             justify-content: space-between; /* Space between site title and login/register */
-            position: relative; /* For absolute positioning of categories */
+            position: relative; /* For positioning of the categories */
         }
 
         .header h1 {
             margin: 0;
         }
 
-        .menu, .categories-list {
+        .menu {
             list-style-type: none;
             padding: 0;
             margin: 0;
-            display: flex;
-            flex-direction: column; /* Align links vertically */
-            position: absolute; /* Position categories absolutely */
-            top: 50px; /* Adjust based on actual height of your header */
-            right: 10px; /* Right align */
+            display: flex; /* Horizontal layout for login/register */
         }
 
-        .menu li, .categories-list li {
-            margin-bottom: 5px; /* Space between links */
+        .menu li {
+            margin-right: 20px; /* Space between Register and Login */
+        }
+
+        .categories-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            position: absolute; /* Absolute position for categories list */
+            top: 100%; /* Position it below the login/register links */
+            right: 0; /* Align with the right edge of the header */
+            background-color: #007bff; /* Match the header background */
+            padding: 10px; /* Add some padding around the categories */
+            margin-top: 5px; /* Slight gap between menu and categories */
+            border-radius: 5px; /* Optional: Adds rounded corners */
         }
 
         .latest-items {
