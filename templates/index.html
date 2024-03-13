@@ -6,59 +6,70 @@
     <title>Welcome to CENGden</title>
     <style>
          body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column; /* Organize content in a column */
-        }
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Organize content in a column for main layout */
+}
 
-        .header {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px;
-            position: relative; /* For positioning login/register */
-        }
+.header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .content-wrapper {
-            display: flex;
-            flex-direction: column; /* Stack content vertically */
-            align-items: center; /* Center-align the children */
-        }
+.header h1 {
+    margin: 0; /* Adjust according to your spacing preference */
+}
 
+.menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Align Register/Login horizontally */
+}
 
-    
+.menu li {
+    margin-left: 20px; /* Space between Register and Login */
+}
 
-        .categories {
-            order: 1; /* Ensure categories come first in the visual order */
-            margin-top: 20px; /* Space from header */
-        }
+.content-wrapper {
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center-align the children horizontally */
+    width: 100%; /* Ensure full width to allow centering */
+}
 
-        .latest-items {
-            order: 2; /* Latest Items come after Categories */
-            width: 100%; /* Take full width to center content */
-            text-align: center;
-        }
+.latest-items {
+    width: 100%; /* Take full width to center content */
+    text-align: center;
+    margin-top: 20px; /* Space from the header */
+}
 
+.pagination {
+    text-align: center;
+    padding: 10px 0; /* Add some padding above and below */
+}
 
-        .pagination {
-            order: 3;
-        }
+.categories {
+    text-align: left; /* Align text to the left for categories */
+    position: absolute; /* Position categories absolutely to place it on the left */
+    top: 100px; /* Adjust based on the actual height of your header */
+    left: 20px; /* Space from the left edge */
+}
 
-        .login-register {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-        }
-
-        .footer {
-            background-color: #f8f9fa;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
+.footer {
+    background-color: #f8f9fa;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
     </style>
 </head>
 <body>
