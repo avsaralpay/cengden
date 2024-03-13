@@ -20,14 +20,21 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
-    users = mongo.db.users
-    login_user = users.find_one({'email' : request.form['email']})
+    if request.method == 'POST':
+        users = mongo.db.users
+        email = request.form.get('email')  # Use .get for safer form data access
+        login_user = users.find_one({'email': email})
 
-    if login_user:
-        if bcrypt.checkpw(request.form['pass'].encode('utf-8'), login_user['password']):
-            session['email'] = request.form['email']
+        if login_user and bcrypt.checkpw(request.form.get('pass').encode('utf-8'), login_user['password']):
+            session['email'] = email
             return redirect(url_for('index'))
-    return 'Invalid username/password combination'
+        else:
+            # Use a generic error message for security reasons
+            error_message = 'Invalid email or password'
+            return render_template('login.html', error=error_message)
+    
+    # For a GET request, just show the login form
+    return render_template('login.html')
 
 @app.route('/register',methods=['POST','GET'])
 def register():
