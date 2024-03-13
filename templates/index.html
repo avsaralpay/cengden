@@ -13,18 +13,19 @@
             flex-direction: column;
         }
 
-        .spacer {
-            flex: 1;
-        }
 
         .header {
+            display: flex;
+            justify-content: center; /* Align items in the center */
+            align-items: center; /* Center items vertically */
             background-color: #007bff;
             color: #fff;
             padding: 10px;
+        }
+
+        .header-content {
+            flex-grow: 1;
             text-align: center;
-            display: flex;
-            justify-content: space-between;
-            position: relative;
         }
 
         .menu {
@@ -84,8 +85,9 @@
 </head>
 <body>
     <div class="header">
-        <div class="spacer"></div>
-        <h1>Welcome to CENGden</h1>
+        <div class="header-content">
+            <h1>Welcome to CENGden</h1>
+        </div>
         <div>
             <ul class="menu">
                 <a href="/register">Register</a>
