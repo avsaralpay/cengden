@@ -41,8 +41,7 @@ def register():
             hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
             # Store additional details
             try:
-                print("try")
-                users.insert({
+                users.insert_one({
                     'email': request.form['email'],
                     'password': hashpass,
                     'name': request.form['name'],
