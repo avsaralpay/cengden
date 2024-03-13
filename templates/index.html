@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to CENGden</title>
     <style>
-        .body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
-            flex-direction: column; /* Stack content vertically */
+            flex-direction: column;
         }
 
         .header {
@@ -18,41 +18,47 @@
             color: #fff;
             padding: 10px;
             display: flex;
-            justify-content: space-between; /* Space between site title and login/register */
-            position: relative; /* For positioning of the categories */
-        }
-
-        .header h1 {
-            margin: 0;
+            justify-content: space-between;
+            position: relative;
         }
 
         .menu {
             list-style-type: none;
             padding: 0;
             margin: 0;
-            display: flex; /* Horizontal layout for login/register */
+            display: flex;
         }
 
         .menu li {
-            margin-right: 20px; /* Space between Register and Login */
+            margin-right: 20px;
         }
 
         .categories-list {
             list-style-type: none;
             padding: 0;
             margin: 0;
-            position: absolute; /* Absolute position for categories list */
-            top: 100%; /* Position it below the login/register links */
-            right: 0; /* Align with the right edge of the header */
-            background-color: #007bff; /* Match the header background */
-            padding: 10px; /* Add some padding around the categories */
-            margin-top: 5px; /* Slight gap between menu and categories */
-            border-radius: 5px; /* Optional: Adds rounded corners */
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #007bff;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+
+        .categories-label {
+            position: absolute;
+            top: 60px; /* Adjust based on your actual layout */
+            right: 10px;
+            color: #fff;
+            background-color: #007bff;
+            padding: 5px 10px;
+            border-radius: 5px;
         }
 
         .latest-items {
             text-align: center;
-            margin-top: 20px; /* Adjust spacing as needed */
+            margin-top: 20px;
         }
 
         .pagination {
@@ -78,21 +84,21 @@
                 <li><a href="#">Register</a></li>
                 <li><a href="#">Login</a></li>
             </ul>
-            <ul class="categories-list">
-                <li>Vehicles</li>
-                <li>Computers</li>
-                <li>Phones</li>
-                <li>Private Lessons</li>
-            </ul>
         </div>
+        <div class="categories-label">CATEGORIES</div>
+        <ul class="categories-list">
+            <li><a href="#">Vehicles</a></li>
+            <li><a href="#">Computers</a></li>
+            <li><a href="#">Phones</a></li>
+            <li><a href="#">Private Lessons</a></li>
+        </ul>
     </div>
     <div class="latest-items">
         <h2>Latest Items</h2>
         <!-- Content for latest items here -->
-    </div>
-    <div class="pagination">
-        <!-- Pagination links here -->
-        <a href="#">Previous</a> <a href="#">1</a> <a href="#">2</a> <a href="#">Next</a>
+        <div class="pagination">
+            <a href="#">Previous</a> <a href="#">1</a> <a href="#">2</a> <a href="#">Next</a>
+        </div>
     </div>
     <div class="footer">
         <p>© 2024 CENGden. All rights reserved.</p>
