@@ -6,6 +6,7 @@ import bcrypt
 
 
 app = Flask(__name__)
+app.secret_key = 'secret_key'
 app.config['MONGO_DBNAME'] = 'cengden'
 app.config['MONGO_URI'] = 'mongodb+srv://aavsaralpay:Alpicik123.@cluster0.khgwljs.mongodb.net/cengden?retryWrites=true&w=majority&appName=Cluster0'
 # Define your routes and other Flask configurations here
@@ -53,8 +54,7 @@ def register():
                 return 'An error occurred while registering the user.'
 
             session['email'] = request.form['email']  # Consider using a more specific session key
-            return("registered successfully")
-            
+            return redirect(url_for('index'))
         
         return 'That email already exists!'
 
