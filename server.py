@@ -21,7 +21,7 @@ mongo = PyMongo(app)
 
 def send_verification_email(email_to, name,verification_code):
     message = Mail(
-        from_email='e2171254@ceng.metu.edu.tr',
+        from_email='e217125@metu.edu.tr',
         to_emails=email_to,
         subject='Verify your CENGden account',
         html_content=f'<strong>Hello {name},</strong><br>Your verification code is: <strong>{verification_code}</strong>')
