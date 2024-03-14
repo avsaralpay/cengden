@@ -21,7 +21,7 @@ mongo = PyMongo(app)
 
 def send_verification_email(email_to, name,verification_code):
     message = Mail(
-        from_email='e2171254@ceng.metu.edu.tr',
+        from_email='aavsaralpay@gmail.com',
         to_emails=email_to,
         subject='Verify your CENGden account',
         html_content=f'<strong>Hello {name},</strong><br>Your verification code is: <strong>{verification_code}</strong>')
@@ -47,15 +47,13 @@ def verify():
     temp_user = temp_verifications.find_one({'email': email})
 
     if temp_user and temp_user['verification_code'] == submitted_code:
-        # Move user data from temporary verification to main users collection
-        temp_user.pop('_id', None)  # Remove the MongoDB generated ID
-        temp_user.pop('verification_code', None)  # Remove the verification code
+        temp_user.pop('_id', None)  
+        temp_user.pop('verification_code', None)  
         users.insert_one(temp_user)
         
-        # Remove the user's entry from the temporary collection
         temp_verifications.delete_one({'email': email})
         
-        session['email'] = email  # Log the user in
+        session['email'] = email 
         return redirect(url_for('index'))
     else:
         error_message = 'Invalid verification code!'
