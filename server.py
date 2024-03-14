@@ -3,6 +3,11 @@
 from flask import Flask,render_template,url_for,request,session,redirect
 from flask_pymongo import PyMongo
 import bcrypt
+import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+import random
+import string
 
 
 app = Flask(__name__)
@@ -12,6 +17,49 @@ app.config['MONGO_URI'] = 'mongodb+srv://aavsaralpay:Alpicik123.@cluster0.khgwlj
 # Define your routes and other Flask configurations here
 
 mongo = PyMongo(app)
+
+
+def send_verification_email(email_to, name,verification_code):
+    message = Mail(
+        from_email='e2171254@ceng.metu.edu.tr',
+        to_emails=email_to,
+        subject='Verify your CENGden account',
+        html_content=f'<strong>Hello {name},</strong><br>Your verification code is: <strong>{verification_code}</strong>')
+    try:
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        response = sg.send(message)
+        print(response.status_code)
+        print(response.body)
+        print(response.headers)
+    except Exception as e:
+        print(str(e))
+
+def generate_verification_code(length=6):
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=length))
+
+@app.route('/verify', methods=['POST'])
+def verify():
+    temp_verifications = mongo.db.temp_verifications
+    users = mongo.db.users
+
+    email = request.form.get('email')
+    submitted_code = request.form.get('verification_code')
+    temp_user = temp_verifications.find_one({'email': email})
+
+    if temp_user and temp_user['verification_code'] == submitted_code:
+        # Move user data from temporary verification to main users collection
+        temp_user.pop('_id', None)  # Remove the MongoDB generated ID
+        temp_user.pop('verification_code', None)  # Remove the verification code
+        users.insert_one(temp_user)
+        
+        # Remove the user's entry from the temporary collection
+        temp_verifications.delete_one({'email': email})
+        
+        session['email'] = email  # Log the user in
+        return redirect(url_for('index'))
+    else:
+        error_message = 'Invalid verification code!'
+        return render_template('verify.html', error=error_message, email=email)
 
 @app.route('/')
 def index():
@@ -39,30 +87,30 @@ def login():
 @app.route('/register',methods=['POST','GET'])
 def register():
     if request.method == 'POST':
-        print(request.form)  # Log the form data for debugging
         users = mongo.db.users
+        temp_verifications = mongo.db.temp_verifications  # Temporary collection for verification codes
         existing_user = users.find_one({'email' : request.form['email']})
+
         if not request.form['email'].endswith('@ceng.metu.edu.tr'):
             error_message = 'Registration is only allowed for CENG emails.'
             return render_template('register.html',error=error_message)
 
         if existing_user is None:
-            hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
+            verification_code = generate_verification_code()
             # Store additional details
-            try:
-                users.insert_one({
-                    'email': request.form['email'],
-                    'password': hashpass,
-                    'name': request.form['name'],
-                    'phone': request.form['phone'],
-                    'role': 'authenticated_user'  # Assign a default role
-                })
-            except Exception as e:
-                print(e)
-                return 'An error occurred while registering the user.'
+            email = request.form['email']
 
+            temp_verifications.insert_one({
+                'email': email,
+                'verification_code': verification_code,
+                'name': request.form['name'],
+                'phone': request.form['phone'],
+                'password': bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
+            })
+
+            send_verification_email(email, request.form['name'], verification_code)
             session['email'] = request.form['email']  # Consider using a more specific session key
-            return redirect(url_for('index'))
+            return render_template('verify.html', email=email)
         
         error_message = 'That email already exists!'
         return render_template('register.html',error=error_message)

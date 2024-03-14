@@ -1,0 +1,18 @@
+<!-- templates/verify.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify Your Email</title>
+</head>
+<body>
+    <h1>Enter Verification Code</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form action="{{ url_for('verify') }}" method="post">
+        <input type="hidden" name="email" value="{{ email }}">
+        <input type="text" name="verification_code" placeholder="Verification Code">
+        <button type="submit">Verify</button>
+    </form>
+</body>
