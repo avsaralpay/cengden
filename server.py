@@ -127,14 +127,14 @@ def register():
 
     return render_template('register.html')
 @app.route('/additem', methods=['POST','GET'])
-def add_item():
+def additem():
     category = request.form.get('category')
     # Depending on the category, extract the relevant fields
     if request.method == 'POST':
         item_data = {
             'category': category,
             'user_email': session['email'],  # Associate item with the user's email
-            # Common fields across all categories
+            # Common fields across all categories   
             'title': request.form.get('title'),
             'price': request.form.get('price'),
             'description': request.form.get('description'),
