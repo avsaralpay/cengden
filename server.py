@@ -126,7 +126,7 @@ def register():
         return render_template('register.html',error=error_message)
 
     return render_template('register.html')
-@app.route('/add-item', methods=['POST'])
+@app.route('/additem', methods=['POST'])
 def add_item():
     category = request.form.get('category')
     # Depending on the category, extract the relevant fields

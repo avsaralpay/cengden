@@ -32,22 +32,167 @@ function showFields() {
     
     <!-- Fields for Vehicles -->
     <div class="field vehicles" style="display:none">
-        <!-- Vehicle fields like Type, Brand, Model, etc. -->
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title" required><br>
+        
+        <label for="type">Type:</label>
+        <input type="text" name="type" id="type" required><br>
+        
+        <label for="brand">Brand:</label>
+        <input type="text" name="brand" id="brand" required><br>
+        
+        <label for="model">Model:</label>
+        <input type="text" name="model" id="model" required><br>
+        
+        <label for="year">Year:</label>
+        <input type="number" name="year" id="year" required><br>
+        
+        <label for="color">Color:</label>
+        <input type="text" name="color" id="color" required><br>
+        
+        <label for="engine_displacement">Engine Displacement (cc):</label>
+        <input type="number" name="engine_displacement" id="engine_displacement" required><br>
+        
+        <label for="fuel_type">Fuel Type:</label>
+        <select name="fuel_type" id="fuel_type" required>
+            <option value="petrol">Petrol</option>
+            <option value="diesel">Diesel</option>
+            <option value="electric">Electric</option>
+        </select><br>
+        
+        <label for="transmission_type">Transmission Type:</label>
+        <select name="transmission_type" id="transmission_type" required>
+            <option value="automatic">Automatic</option>
+            <option value="manual">Manual</option>
+        </select><br>
+        
+        <label for="mileage">Mileage (km or miles):</label>
+        <input type="number" name="mileage" id="mileage" required><br>
+        
+        <label for="price">Price:</label>
+        <input type="number" name="price" id="price" required><br>
+        
+        <label for="image">Image URL:</label>
+        <input type="url" name="image" id="image"><br>
+        
+        <label for="description">Description:</label>
+        <textarea name="description" id="description" required></textarea><br>
     </div>
     
     <!-- Fields for Computers -->
     <div class="field computers" style="display:none">
-        <!-- Computer fields like Type, Brand, Processor, etc. -->
+        <label for="title_computers">Title:</label>
+        <input type="text" name="title_computers" id="title_computers" required><br>
+    
+        <label for="type_computers">Type:</label>
+        <select name="type_computers" id="type_computers" required>
+            <option value="tablet">Tablet</option>
+            <option value="notebook">Notebook</option>
+            <option value="desktop">Desktop</option>
+            <!-- Add more types as needed -->
+        </select><br>
+    
+        <label for="brand_computers">Brand:</label>
+        <input type="text" name="brand_computers" id="brand_computers" required><br>
+        
+        <label for="model_computers">Model:</label>
+        <input type="text" name="model_computers" id="model_computers" required><br>
+        
+        <label for="year_computers">Year:</label>
+        <input type="number" name="year_computers" id="year_computers" required><br>
+        
+        <label for="processor_computers">Processor:</label>
+        <input type="text" name="processor_computers" id="processor_computers" required><br>
+        
+        <label for="ram_computers">RAM:</label>
+        <input type="text" name="ram_computers" id="ram_computers" required><br>
+        
+        <label for="storage_computers">Storage:</label>
+        <input type="text" name="storage_computers" id="storage_computers" required><br>
+        
+        <label for="graphics_card_computers">Graphics Card:</label>
+        <input type="text" name="graphics_card_computers" id="graphics_card_computers"><br>
+        
+        <label for="os_computers">Operating System:</label>
+        <input type="text" name="os_computers" id="os_computers" required><br>
+        
+        <label for="price_computers">Price:</label>
+        <input type="number" name="price_computers" id="price_computers" required><br>
+        
+        <label for="image_computers">Image URL:</label>
+        <input type="url" name="image_computers" id="image_computers"><br>
+        
+        <label for="description_computers">Description:</label>
+        <textarea name="description_computers" id="description_computers" required></textarea><br>
     </div>
     
     <!-- Fields for Phones -->
     <div class="field phones" style="display:none">
-        <!-- Phone fields like Brand, Model, OS, etc. -->
+        label for="title_phones">Title:</label>
+        <input type="text" name="title_phones" id="title_phones" required><br>
+
+        <label for="brand_phones">Brand:</label>
+        <input type="text" name="brand_phones" id="brand_phones" required><br>
+
+        <label for="model_phones">Model:</label>
+        <input type="text" name="model_phones" id="model_phones" required><br>
+
+        <label for="year_phones">Year:</label>
+        <input type="number" name="year_phones" id="year_phones" required><br>
+
+        <label for="os_phones">Operating System:</label>
+        <input type="text" name="os_phones" id="os_phones" required><br>
+
+        <label for="processor_phones">Processor:</label>
+        <input type="text" name="processor_phones" id="processor_phones"><br>
+
+        <label for="ram_phones">RAM:</label>
+        <input type="text" name="ram_phones" id="ram_phones" required><br>
+
+        <label for="storage_phones">Storage:</label>
+        <input type="text" name="storage_phones" id="storage_phones" required><br>
+
+        <label for="camera_phones">Camera Specifications:</label>
+        <input type="text" name="camera_phones" id="camera_phones"><br>
+
+        <label for="battery_phones">Battery Capacity:</label>
+        <input type="text" name="battery_phones" id="battery_phones" required><br>
+
+        <label for="price_phones">Price:</label>
+        <input type="number" name="price_phones" id="price_phones" required><br>
+
+        <label for="image_phones">Image URL:</label>
+        <input type="url" name="image_phones" id="image_phones"><br>
+
+        <label for="description_phones">Description:</label>
+        <textarea name="description_phones" id="description_phones" required></textarea><br>
     </div>
     
     <!-- Fields for Private Lessons -->
     <div class="field lessons" style="display:none">
-        <!-- Lesson fields like Tutor Name, Location, Price, etc. -->
+        <label for="title_lessons">Title:</label>
+        <input type="text" name="title_lessons" id="title_lessons" required><br>
+
+        <label for="tutor_name">Tutor Name:</label>
+        <input type="text" name="tutor_name" id="tutor_name" required><br>
+
+        <label for="lessons_offered">Lessons:</label>
+        <input type="text" name="lessons_offered" id="lessons_offered" required><br>
+
+        <label for="location_lessons">Location:</label>
+        <input type="text" name="location_lessons" id="location_lessons" required><br>
+
+        <label for="duration_lessons">Duration:</label>
+        <input type="text" name="duration_lessons" id="duration_lessons" required><br>
+
+        <label for="price_lessons">Price:</label>
+        <input type="number" name="price_lessons" id="price_lessons" required><br>
+
+        <label for="image_lessons">Image URL:</label>
+        <input type="url" name="image_lessons" id="image_lessons"><br>
+
+        <label for="description_lessons">Description:</label>
+        <textarea name="description_lessons" id="description_lessons" required></textarea><br>
     </div>
     
     <input type="submit" value="Add Item">
