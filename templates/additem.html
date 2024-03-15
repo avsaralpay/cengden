@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Item - CENGden</title>
+<script>
+function showFields() {
+    var category = document.getElementById("category").value;
+    var fields = document.getElementsByClassName("field");
+    for (var i = 0; i < fields.length; i++) {
+        fields[i].style.display = "none"; // Hide all fields
+    }
+    var relevantFields = document.getElementsByClassName(category);
+    for (var i = 0; i < relevantFields.length; i++) {
+        relevantFields[i].style.display = "block"; // Show only relevant fields
+    }
+}
+</script>
+</head>
+<body>
+<h2>Add New Item</h2>
+<form action="/add-item" method="post">
+    <label for="category">Category:</label>
+    <select name="category" id="category" onchange="showFields()">
+        <option value="">Select a category</option>
+        <option value="vehicles">Vehicles</option>
+        <option value="computers">Computers</option>
+        <option value="phones">Phones</option>
+        <option value="lessons">Private Lessons</option>
+    </select>
+    
+    <!-- Fields for Vehicles -->
+    <div class="field vehicles" style="display:none">
+        <!-- Vehicle fields like Type, Brand, Model, etc. -->
+    </div>
+    
+    <!-- Fields for Computers -->
+    <div class="field computers" style="display:none">
+        <!-- Computer fields like Type, Brand, Processor, etc. -->
+    </div>
+    
+    <!-- Fields for Phones -->
+    <div class="field phones" style="display:none">
+        <!-- Phone fields like Brand, Model, OS, etc. -->
+    </div>
+    
+    <!-- Fields for Private Lessons -->
+    <div class="field lessons" style="display:none">
+        <!-- Lesson fields like Tutor Name, Location, Price, etc. -->
+    </div>
+    
+    <input type="submit" value="Add Item">
+</form>
+</body>
+</html>

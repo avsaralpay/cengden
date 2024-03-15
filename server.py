@@ -126,6 +126,68 @@ def register():
         return render_template('register.html',error=error_message)
 
     return render_template('register.html')
+@app.route('/add-item', methods=['POST'])
+def add_item():
+    category = request.form.get('category')
+    # Depending on the category, extract the relevant fields
+    item_data = {
+        'category': category,
+        'user_email': session['email'],  # Associate item with the user's email
+        # Common fields across all categories
+        'title': request.form.get('title'),
+        'price': request.form.get('price'),
+        'description': request.form.get('description'),
+        'image': request.form.get('image'),
+    }
+    
+    # Handle additional fields based on category
+    if category == 'vehicles':
+        item_data.update({
+            'type': request.form.get('type'),
+            'brand': request.form.get('brand'),
+            'model': request.form.get('model'),
+            'year': request.form.get('year'),
+            'color': request.form.get('color'),
+            'engine_displacement': request.form.get('engine_displacement'),
+            'fuel_type': request.form.get('fuel_type'),
+            'transmission_type': request.form.get('transmission_type'),
+            'mileage': request.form.get('mileage'),
+        })
+    elif category == 'computers':
+        item_data.update({
+            'type': request.form.get('type'),
+            'brand': request.form.get('brand'),
+            'model': request.form.get('model'),
+            'year': request.form.get('year'),
+            'processor': request.form.get('processor'),
+            'ram': request.form.get('ram'),
+            'storage': request.form.get('storage'),
+            'graphics_card': request.form.get('graphics_card'),
+            'operating_system': request.form.get('operating_system'),
+        })
+    elif category == 'phones':
+        item_data.update({
+            'brand': request.form.get('brand'),
+            'model': request.form.get('model'),
+            'year': request.form.get('year'),
+            'operating_system': request.form.get('operating_system'),
+            'processor': request.form.get('processor'),
+            'ram': request.form.get('ram'),
+            'storage': request.form.get('storage'),
+            'camera_specifications': request.form.get('camera_specifications'),
+            'battery_capacity': request.form.get('battery_capacity'),
+        })
+    elif category == 'lessons':
+        item_data.update({
+            'tutor_name': request.form.get('tutor_name'),
+            'lessons': request.form.get('lessons'),
+            'location': request.form.get('location'),
+            'duration': request.form.get('duration'),
+        })
+    
+    # Insert item data into the database
+    mongo.db.items.insert_one(item_data)
+    return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.secret_key = 'secret_key'
