@@ -82,6 +82,11 @@ def login():
     # For a GET request, just show the login form
     return render_template('login.html')
 
+@app.route('/logout')
+def logout():
+    session.pop('email', None)  # Remove user's email from session
+    return redirect(url_for('index'))
+
 @app.route('/register',methods=['POST','GET'])
 def register():
     if request.method == 'POST':
