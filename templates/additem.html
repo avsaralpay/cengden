@@ -5,18 +5,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Add Item - CENGden</title>
 <script>
-function showFields() {
-    var category = document.getElementById("category").value;
-    var fields = document.getElementsByClassName("field");
-    for (var i = 0; i < fields.length; i++) {
-        fields[i].style.display = "none"; // Hide all fields
+    function showFields() {
+        var category = document.getElementById("category").value;
+        var fields = document.getElementsByClassName("field");
+        for (var i = 0; i < fields.length; i++) {
+            fields[i].style.display = "none"; // Hide all fields initially
+            var inputs = fields[i].getElementsByTagName('input');
+            for (var j = 0; j < inputs.length; j++) {
+                inputs[j].disabled = true; // Disable all input fields initially
+            }
+            var selects = fields[i].getElementsByTagName('select');
+            for (var k = 0; k < selects.length; k++) {
+                selects[k].disabled = true; // Disable all select fields initially
+            }
+            var textareas = fields[i].getElementsByTagName('textarea');
+            for (var l = 0; l < textareas.length; l++) {
+                textareas[l].disabled = true; // Disable all textarea fields initially
+            }
+        }
+        var relevantFields = document.getElementsByClassName(category);
+        for (var i = 0; i < relevantFields.length; i++) {
+            relevantFields[i].style.display = "block"; // Show only relevant fields
+            // Enable fields for the selected category
+            var inputs = relevantFields[i].getElementsByTagName('input');
+            for (var j = 0; j < inputs.length; j++) {
+                inputs[j].disabled = false;
+            }
+            var selects = relevantFields[i].getElementsByTagName('select');
+            for (var k = 0; k < selects.length; k++) {
+                selects[k].disabled = false;
+            }
+            var textareas = relevantFields[i].getElementsByTagName('textarea');
+            for (var l = 0; l < textareas.length; l++) {
+                textareas[l].disabled = false;
+            }
+        }
     }
-    var relevantFields = document.getElementsByClassName(category);
-    for (var i = 0; i < relevantFields.length; i++) {
-        relevantFields[i].style.display = "block"; // Show only relevant fields
-    }
-}
-</script>
+    
+    // Add an event listener for the form submission
+    window.onload = function() {
+        showFields(); // Call showFields on page load
+        document.querySelector('form').addEventListener('submit', showFields);
+    };
+    </script>
 </head>
 <body onload="showFields()"> <!-- Ensure fields are correctly shown/hidden on page load -->
 <h2>Add New Item</h2>
