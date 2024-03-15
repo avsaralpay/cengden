@@ -92,20 +92,27 @@ def register():
         if not request.form['email'].endswith('@ceng.metu.edu.tr'):
             error_message = 'Registration is only allowed for CENG emails.'
             return render_template('register.html',error=error_message)
+        
+        existing_user = users.find_one({'email': email})
 
         if existing_user is None:
             verification_code = generate_verification_code()
             # Store additional details
             email = request.form['email']
-
-            temp_verifications.insert_one({
-                'email': email,
-                'verification_code': verification_code,
-                'name': request.form['name'],
-                'phone': request.form['phone'],
-                'password': bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
-            })
-
+            existing_temp_user = temp_verifications.find_one({'email': email})
+            if existing_temp_user:
+                temp_verifications.update_one(
+                    {'email': email},
+                    {'$set': {'verification_code': verification_code}}
+                )
+            else:
+                temp_verifications.insert_one({
+                    'email': email,
+                    'verification_code': verification_code,
+                    'name': request.form['name'],
+                    'phone': request.form['phone'],
+                    'password': bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
+                })
             send_verification_email(email, request.form['name'], verification_code)
             session['email'] = request.form['email']  # Consider using a more specific session key
             return render_template('verify.html', email=email)

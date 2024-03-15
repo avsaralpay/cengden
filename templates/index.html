@@ -94,8 +94,15 @@
         </div>
     <div>
         <ul class="menu">
-                <a href="/register">Register</a>
-                <li><a href="/login">Login</a></li>
+            {% if 'email' in session %}
+            <a href="/account">My Account</a>
+            <a href="/items">My Items</a>
+            <a href="/favorites">My Favorites</a>
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
+        {% endif %}
         </ul>
     </div>
     
