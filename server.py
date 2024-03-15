@@ -182,8 +182,9 @@ def additem():
             })
         elif category == 'lessons':
             item_data.update({
+                'image_link': request.form.get('image_link'),
                 'tutor_name': request.form.get('tutor_name'),
-                'lessons': request.form.get('lessons'),
+                'lessons': request.form.get('lessons_offered'),
                 'location': request.form.get('location'),
                 'duration': request.form.get('duration'),
             })
