@@ -126,12 +126,13 @@ def register():
         return render_template('register.html',error=error_message)
 
     return render_template('register.html')
+
+
 @app.route('/additem', methods=['POST','GET'])
 def additem():
     category = request.form.get('category')
     # Depending on the category, extract the relevant fields
     if request.method == 'POST':
-        return render_template('index.html', category=category)
         item_data = {
             'category': category,
             'user_email': session['email'],  # Associate item with the user's email
