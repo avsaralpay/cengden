@@ -18,7 +18,7 @@ function showFields() {
 }
 </script>
 </head>
-<body>
+<body onload="showFields()"> <!-- Ensure fields are correctly shown/hidden on page load -->
 <h2>Add New Item</h2>
 <form action="/add-item" method="post">
     <label for="category">Category:</label>
