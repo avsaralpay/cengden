@@ -20,7 +20,7 @@ function showFields() {
 </head>
 <body onload="showFields()"> <!-- Ensure fields are correctly shown/hidden on page load -->
 <h2>Add New Item</h2>
-<form action="/add-item" method="post">
+<form action="/additem" method="post">
     <label for="category">Category:</label>
     <select name="category" id="category" onchange="showFields()">
         <option value="">Select a category</option>
@@ -128,7 +128,7 @@ function showFields() {
     
     <!-- Fields for Phones -->
     <div class="field phones" style="display:none">
-        label for="title_phones">Title:</label>
+        <label for="title_phones">Title:</label>
         <input type="text" name="title_phones" id="title_phones" required><br>
 
         <label for="brand_phones">Brand:</label>
