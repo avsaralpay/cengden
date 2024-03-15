@@ -21,7 +21,6 @@
             background-color: #007bff;
             color: #fff;
             padding: 10px;
-            position: relative;
         }
 
         .header-content {
@@ -38,8 +37,12 @@
             display: flex;
         }
 
-        .menu li {
+        .menu a {
             margin-right: 20px;
+        }
+
+        .menu a:last-child {
+            margin-right: 0; /* Remove margin for the last link */
         }
 
         .categories-label {
