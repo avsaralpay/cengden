@@ -5,81 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CENGden</title>
     <style>
-        .body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
+            align-items: center; /* Center the content */
         }
-
 
         .header {
             display: flex;
-            justify-content: space-between; /* Adjusted to space-between to allocate space on both ends */
-            align-items: center; /* Center items vertically */
+            justify-content: space-between;
+            align-items: center;
             background-color: #007bff;
             color: #fff;
             padding: 10px;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
+            width: 100%; /* Make the header full width */
         }
 
         .header-content {
-            flex-grow: 1;
             text-align: center;
-            margin-left: 120px; 
         }
 
-        .menu {
+        .menu, .categories-container {
             list-style-type: none;
-            padding: 0;
-            color: white;
-            margin-right: 20px;
-            display: flex;
-        }
-        .menu li {
-            margin-left: 20px; /* Adds space to the left of each list item except the first one */
-        }
-
-        .menu a {
-            margin-right: 20px;
-        }
-
-        .menu a:last-child {
-            margin-right: 0; /* Remove margin for the last link */
-        }
-
-        .categories-container {
-            display: flex;
-            flex-direction: column;
-            margin-right: 20px; /* Adjust spacing */
-        }
-
-        .categories-container ul {
             padding: 0;
             margin: 0;
-            list-style-type: none;
+            color: white;
         }
 
-        .categories-container ul li a {
+        .menu a, .categories-container a {
             color: #fff;
             text-decoration: none;
             padding: 5px;
+            display: block;
         }
 
+        .categories-container {
+            position: absolute; /* Positioned absolutely */
+            top: 20px; /* Adjust as needed */
+            left: 20px;
+            background-color: #007bff;
+            padding: 10px;
+            border-radius: 5px;
+        }
 
         .latest-items {
-            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center the items */
             margin-top: 20px;
+            width: 80%; /* Adjust the width as needed */
+        }
+
+        .item {
+            margin: 10px;
+            text-align: center;
         }
 
         .pagination {
             text-align: center;
             margin-top: 10px;
+            width: 100%; /* Make the pagination full width */
         }
 
         .footer {
@@ -93,35 +81,29 @@
     </style>
 </head>
 <body>
+    <div class="categories-container">
+        <a href="/category/vehicles">Vehicles</a>
+        <a href="/category/computers">Computers</a>
+        <a href="/category/phones">Phones</a>
+        <a href="/category/private_lessons">Private Lessons</a>
+    </div>
     <div class="header">
-        <div class="header-left">
-            <div class="categories-container">
-                <div>CATEGORIES</div>
-                <ul>
-                    <li><a href="/category/vehicles">Vehicles</a></li>
-                    <li><a href="/category/computers">Computers</a></li>
-                    <li><a href="/category/phones">Phones</a></li>
-                    <li><a href="/category/private_lessons">Private Lessons</a></li>
-                </ul>
-            </div>
-            <div class="header-content">
-                <h1>CENGden</h1>
-            </div>
+        <div class="header-content">
+            <h1>CENGden</h1>
         </div>
-        <div>
-            <ul class="menu">
-                {% if 'email' in session %}
+        <ul class="menu">
+            {% if 'email' in session %}
                 <a href="/additem">Add item</a>
                 <a href="/account">My Account</a>
                 <a href="/items">My Items</a>
                 <a href="/favorites">My Favorites</a>
                 <a href="/logout">Logout</a>
-                {% else %}
+            {% else %}
                 <a href="/register">Register</a>
                 <a href="/login">Login</a>
-                {% endif %}
-            </ul>
-        </div>
+            {% endif %}
+        </ul>
+    </div>
     <div class="latest-items">
         <h2>Latest Items</h2>
         {% for item in items %}
