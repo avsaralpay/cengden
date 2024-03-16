@@ -8,6 +8,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 import random
 import string
+from datetime import datetime
 
 
 app = Flask(__name__)
@@ -61,7 +62,8 @@ def verify():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    items = mongo.db.items.find().sort("timestamp", -1)  # -1 for descending order
+    return render_template('index.html', items=list(items))
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -140,9 +142,9 @@ def additem():
             'title': request.form.get('title'),
             'price': request.form.get('price'),
             'description': request.form.get('description'),
-            'image': request.form.get('image'),
+            'image_link': request.form.get('image_link'),
         }
-        
+        item_data['timestamp'] = datetime.utcnow()
         # Handle additional fields based on category
         if category == 'vehicles':
             item_data.update({
@@ -182,7 +184,6 @@ def additem():
             })
         elif category == 'lessons':
             item_data.update({
-                'image_link': request.form.get('image_link'),
                 'tutor_name': request.form.get('tutor_name'),
                 'lessons': request.form.get('lessons_offered'),
                 'location': request.form.get('location'),
