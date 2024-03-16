@@ -48,29 +48,22 @@
             margin-right: 0; /* Remove margin for the last link */
         }
 
-        .categories-label {
-            position: absolute;
-            top: 60px; /* Adjust based on your actual layout */
-            left: 10px;
-            color: #fff;
-            background-color: #007bff;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
+        .categories-container {
+        position: fixed; /* Fixed position to keep it visible */
+        top: 100px; /* Adjust as needed */
+        left: 0;
+        width: 200px; /* Adjust as needed */
+        background-color: #007bff;
+        padding: 10px;
+        color: #fff;
+        border-radius: 5px;
+    }
 
-        .categories-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: #007bff;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 5px;
-            width: max-content; /* Adjust width based on content */
-            color: #fff;
+        .categories-list li a {
+            color: #fff; /* Ensure links are visible */
+            text-decoration: none; /* Optional: removes underline */
+            display: block; /* Make each link block-level for easier clicking */
+            padding: 5px 0; /* Add some padding */
         }
 
         .latest-items {
