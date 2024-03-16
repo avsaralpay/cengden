@@ -65,6 +65,12 @@ def index():
     items = mongo.db.items.find().sort("timestamp", -1)  # -1 for descending order
     return render_template('index.html', items=list(items))
 
+
+@app.route('/category/<category_name>')
+def category(category_name):
+    items = mongo.db.items.find({'category': category_name}).sort([('timestamp', -1)])
+    return render_template('category.html', items=items, category=category_name)
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 

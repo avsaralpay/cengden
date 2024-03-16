@@ -23,11 +23,6 @@
             padding: 10px;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-        }
-
         .header-content {
             flex-grow: 1;
             text-align: center;
@@ -54,23 +49,22 @@
         }
 
         .categories-container {
-            display: flex;
-            flex-direction: column;
-            margin-right: 20px; /* Adjust spacing */
-        }
+        position: fixed; /* Fixed position to keep it visible */
+        top: 100px; /* Adjust as needed */
+        left: 0;
+        width: 200px; /* Adjust as needed */
+        background-color: #007bff;
+        padding: 10px;
+        color: #fff;
+        border-radius: 5px;
+    }
 
-        .categories-container ul {
-            padding: 0;
-            margin: 0;
-            list-style-type: none;
+        .categories-list li a {
+            color: #fff; /* Ensure links are visible */
+            text-decoration: none; /* Optional: removes underline */
+            display: block; /* Make each link block-level for easier clicking */
+            padding: 5px 0; /* Add some padding */
         }
-
-        .categories-container ul li a {
-            color: #fff;
-            text-decoration: none;
-            padding: 5px;
-        }
-
 
         .latest-items {
             text-align: center;
@@ -94,19 +88,8 @@
 </head>
 <body>
     <div class="header">
-        <div class="header-left">
-            <div class="categories-container">
-                <div>CATEGORIES</div>
-                <ul>
-                    <li><a href="/category/vehicles">Vehicles</a></li>
-                    <li><a href="/category/computers">Computers</a></li>
-                    <li><a href="/category/phones">Phones</a></li>
-                    <li><a href="/category/private_lessons">Private Lessons</a></li>
-                </ul>
-            </div>
-            <div class="header-content">
-                <h1>CENGden</h1>
-            </div>
+        <div class="header-content">
+            <h1>CENGden</h1>
         </div>
         <div>
             <ul class="menu">
@@ -122,16 +105,23 @@
                 {% endif %}
             </ul>
         </div>
-    <div class="latest-items">
-        <h2>Latest Items</h2>
-        {% for item in items %}
-        <div class="item">
+        <div class="categories-label">CATEGORIES</div>
+        <ul class="categories-list">
+            <li><a href="/category/vehicles">Vehicles</a></li>
+            <li><a href="/category/computers">Computers</a></li>
+            <li><a href="/category/phones">Phones</a></li>
+            <li><a href="/category/private_lessons">Private Lessons</a></li>
+        </ul>
+    </div>
+    <h2>Items in {{ category }}</h2>
+        <div class="items">
+            {% for item in items %}
             <a href="/item/{{ item['_id'] }}">
                 <img src="{{ item['image_link'] }}" alt="{{ item['title'] }}" style="width:250px;height:250px;">
                 <div>{{ item['title'] }}</div>
             </a>
-        </div>
-        {% endfor %}
+            </div>
+            {% endfor %}
         <div class="pagination">
             <a href="#">Previous</a> <a href="#">1</a> <a href="#">2</a> <a href="#">Next</a>
         </div>
