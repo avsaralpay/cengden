@@ -25,8 +25,17 @@
             box-sizing: border-box; /* Ensure padding is included in width */
         }
 
-        .header-content {
+        .header-left, .header-center, .header-right {
+            flex: 1;
             text-align: center;
+        }
+
+        .header-left {
+            text-align: left;
+        }
+
+        .header-right {
+            text-align: right;
         }
 
         .menu, .categories-container {
@@ -92,30 +101,30 @@
     </style>
 </head>
 <body>
-    <div class="categories-label">CATEGORIES</div>
-    <div class="categories-container">
-        <a href="/category/vehicles">Vehicles</a>
-        <a href="/category/computers">Computers</a>
-        <a href="/category/phones">Phones</a>
-        <a href="/category/private_lessons">Private Lessons</a>
-    </div>
     <div class="header">
-        <div class="header-content">
-            <h1>CENGden</h1>
+        <div class="header-left">
+            <div class="categories-label">CATEGORIES</div>
+            <div class="categories-container">
+                <a href="/category/vehicles">Vehicles</a>
+                <a href="/category/computers">Computers</a>
+                <a href="/category/phones">Phones</a>
+                <a href="/category/private_lessons">Private Lessons</a>
         </div>
-        <ul class="menu">
-            {% if 'email' in session %}
-                <a href="/additem">Add item</a>
-                <a href="/account">My Account</a>
-                <a href="/items">My Items</a>
-                <a href="/favorites">My Favorites</a>
-                <a href="/logout">Logout</a>
-            {% else %}
-                <a href="/register">Register</a>
-                <a href="/login">Login</a>
-            {% endif %}
-        </ul>
-    </div>
+        <div class="header-center"><h1>CENGden</h1></div>
+        <div class="header-right"></div>
+            <ul class="menu">
+                {% if 'email' in session %}
+                    <a href="/additem">Add item</a>
+                    <a href="/account">My Account</a>
+                    <a href="/items">My Items</a>
+                    <a href="/favorites">My Favorites</a>
+                    <a href="/logout">Logout</a>
+                {% else %}
+                    <a href="/register">Register</a>
+                    <a href="/login">Login</a>
+                {% endif %}
+            </ul>
+        </div>
     <div class="latest-items">
         <h2>Latest Items</h2>
         {% for item in items %}
