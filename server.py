@@ -96,23 +96,22 @@ def logout():
     session.pop('email', None)  # Remove user's email from session
     return redirect(url_for('index'))
 
-@app.route('/register',methods=['POST','GET'])
+@app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
         users = mongo.db.users
         temp_verifications = mongo.db.temp_verifications  # Temporary collection for verification codes
-        existing_user = users.find_one({'email' : request.form['email']})
+        email = request.form['email']  # Define email here to use it throughout
 
-        if not request.form['email'].endswith('@ceng.metu.edu.tr'):
+        if not email.endswith('@ceng.metu.edu.tr'):
             error_message = 'Registration is only allowed for CENG emails.'
-            return render_template('register.html',error=error_message)
+            return render_template('register.html', error=error_message)
         
         existing_user = users.find_one({'email': email})
 
         if existing_user is None:
             verification_code = generate_verification_code()
-            # Store additional details
-            email = request.form['email']
+            # Check if a temporary user already exists
             existing_temp_user = temp_verifications.find_one({'email': email})
             if existing_temp_user:
                 temp_verifications.update_one(
@@ -128,11 +127,11 @@ def register():
                     'password': bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
                 })
             send_verification_email(email, request.form['name'], verification_code)
-            session['email'] = request.form['email']  # Consider using a more specific session key
+            session['email'] = email  # Consider using a more specific session key for email
             return render_template('verify.html', email=email)
         
         error_message = 'That email already exists!'
-        return render_template('register.html',error=error_message)
+        return render_template('register.html', error=error_message)
 
     return render_template('register.html')
 
