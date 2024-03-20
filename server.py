@@ -212,7 +212,46 @@ def item_detail(item_id):
             'phone': mongo.db.users.find_one({'email': item['user_email']})['phone']
         }
     return render_template('item_detail.html', item=item, user=user_info)
-    
+
+
+@app.route('/account', methods=['GET', 'POST'])
+def account():
+    if 'email' not in session:
+        return redirect(url_for('login'))
+
+    users = mongo.db.users
+    user = users.find_one({'email': session['email']})
+
+    if request.method == 'POST':
+        new_email = request.form.get('email')
+        new_password = request.form.get('password')
+        new_phone = request.form.get('phone')
+        update_data = {}
+
+        # Update password if provided
+        if new_password:
+            hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
+            update_data['password'] = hashed_password
+
+        # Update email if provided and different from the current one
+        if new_email and new_email != session['email']:
+            update_data['email'] = new_email
+            session['email'] = new_email  # Update session email
+            # Update the contact information in the user's posted items
+            items = mongo.db.items
+            items.update_many({'user_email': user['email']}, {'$set': {'user_email': new_email}})
+
+        # Update phone if provided
+        if new_phone and new_phone != user.get('phone'):
+            update_data['phone'] = new_phone
+
+        if update_data:
+            users.update_one({'email': user['email']}, {'$set': update_data})
+
+        return redirect(url_for('account'))
+
+    return render_template('account.html', user=user)
+
 if __name__ == "__main__":
     app.secret_key = 'secret_key'
     app.run(debug=True)
