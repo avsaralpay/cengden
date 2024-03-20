@@ -128,7 +128,6 @@ def register():
                 })
             send_verification_email(email, request.form['name'], verification_code)
             session['email'] = email  # Consider using a more specific session key for email
-            session['phone'] = request.form['phone']
             return render_template('verify.html', email=email)
         
         error_message = 'That email already exists!'
@@ -145,7 +144,6 @@ def additem():
         item_data = {
             'category': category,
             'user_email': session['email'],  # Associate item with the user's email
-            'user_phone': session['phone'],  # Associate item with the user's phone
             # Common fields across all categories   
             'title': request.form.get('title'),
             'price': request.form.get('price'),
