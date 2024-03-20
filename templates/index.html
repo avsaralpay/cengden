@@ -123,9 +123,9 @@
         {% for item in items %}
         <div class="item">
             <a href="/item/{{ item['_id'] }}">
-                <img src="{{ item['image_link'] }}" alt="{{ item['title'] }}" style="width:200px;height:200px;">
+                <img src="{{ item['image'] }}" alt="{{ item['title'] }}" style="width:100px;height:100px;">
+                <div>{{ item['title'] }}</div>
             </a>
-            <div>{{ item['title'] }}</div>
         </div>
         {% endfor %}
         <div class="pagination">
