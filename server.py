@@ -205,11 +205,21 @@ def additem():
 def item_detail(item_id):
     item = mongo.db.items.find_one({'_id': ObjectId(item_id)})
     user_info = None
+
     if 'email' in session:
-        user_info = {
-            'email': item['user_email'],
-            'phone': mongo.db.users.find_one({'email': item['user_email']})['phone']
-        }
+        user = mongo.db.users.find_one({'email': item['user_email']})
+        if user:  # Check if the user was found
+            user_info = {
+                'email': item['user_email'],
+                'phone': user['phone']
+            }
+        else:
+            # Handle the case where the user is not found
+            user_info = {
+                'email': 'User not found',
+                'phone': 'Not available'
+            }
+
     return render_template('item_detail.html', item=item, user=user_info)
 
 
