@@ -248,9 +248,9 @@ def account():
         if update_data:
             users.update_one({'email': user['email']}, {'$set': update_data})
 
-        return redirect(url_for('account'))
+        return redirect(url_for('index'))
 
-    return render_template('index.html', user=user)
+    return render_template('account.html', user=user)
 
 if __name__ == "__main__":
     app.secret_key = 'secret_key'
