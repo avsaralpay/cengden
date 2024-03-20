@@ -5,26 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ item['title'] }}</title>
     <style>
-        body {
+        .item-container {
             text-align: center;
-            font-family: Arial, sans-serif;
-        }
-
-        img {
-            width: 300px;
             margin-top: 20px;
         }
-
-        .details {
-            display: inline-block;
-            text-align: left;
+        .item-image {
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+        .item-details {
             margin-top: 20px;
         }
-
-        .details p {
-            padding: 5px 0; /* Adds padding between each paragraph */
+        .item-details p {
+            margin: 10px 0; /* Adds padding between each property */
         }
-
         .contact-info {
             margin-top: 30px;
         }
@@ -32,8 +26,8 @@
 </head>
 <body>
     <h2>{{ item['title'] }}</h2>
-    <img src="{{ item['image_link'] }}" alt="{{ item['title'] }}" style="width:300px;">
-    <div class="details">
+    <img  class="item-image" src="{{ item['image_link'] }}" alt="{{ item['title'] }}" style="width:300px;">
+    <div class="item-details">
         <p><strong>Category:</strong> {{ item['category'] }}</p>
         <p><strong>Description:</strong> {{ item['description'] }}</p>
         <p><strong>Price:</strong> {{ item['price'] }}</p>
@@ -84,9 +78,6 @@
     {% else %}
     <p>Contact information available for registered users.</p>
     {% endif %}
-
-    <a href="/">Back to Home</a>
-</body>
 
     <a href="/">Back to Home</a>
 </body>
