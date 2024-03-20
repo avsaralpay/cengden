@@ -119,7 +119,7 @@ def register():
                     {'$set': {'verification_code': verification_code}}
                 )
             else:
-                temp_verifications.insert_one({
+                temp_verifications  .insert_one({
                     'email': email,
                     'verification_code': verification_code,
                     'name': request.form['name'],
@@ -223,14 +223,9 @@ def account():
 
     if request.method == 'POST':
         new_email = request.form.get('email')
-        new_password = request.form.get('password')
+
         new_phone = request.form.get('phone')
         update_data = {}
-
-        # Update password if provided
-        if new_password:
-            hashed_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
-            update_data['password'] = hashed_password
 
         # Update email if provided and different from the current one
         if new_email and new_email != session['email']:
