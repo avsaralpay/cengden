@@ -250,7 +250,7 @@ def account():
 
         return redirect(url_for('account'))
 
-    return render_template('account.html', user=user)
+    return render_template('index.html', user=user)
 
 if __name__ == "__main__":
     app.secret_key = 'secret_key'

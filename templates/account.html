@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<<head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My CENGden Account</title>
@@ -60,7 +60,8 @@
     <div class="container">
         <h1>My CENGden Account</h1>
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" value="{{ user['email'] }}"><br>
+            <input type="email" id="email" name="email" value="{{ user['email'] }}" pattern=".*@ceng.metu.edu.tr$" required>
+            <small>Email must end with @ceng.metu.edu.tr</small>
 
             <label for="phone">Phone:</label>
             <input type="text" id="phone" name="phone" value="{{ user.get('phone', '') }}"><br>
