@@ -201,6 +201,17 @@ def additem():
     mongo.db.items.insert_one(item_data)
     return redirect(url_for('index'))
 
+@app.route('/item/<item_id>')
+def item_detail(item_id):
+    item = mongo.db.items.find_one({'_id': ObjectId(item_id)})
+    user_info = None
+    if 'email' in session:
+        user_info = {
+            'email': item['user_email'],
+            'phone': mongo.db.users.find_one({'email': item['user_email']})['phone']
+        }
+    return render_template('item_detail.html', item=item, user=user_info)
+    
 if __name__ == "__main__":
     app.secret_key = 'secret_key'
     app.run(debug=True)

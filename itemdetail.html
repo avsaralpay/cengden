@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ item['title'] }}</title>
+</head>
+<body>
+    <h2>{{ item['title'] }}</h2>
+    <img src="{{ item['image'] }}" alt="{{ item['title'] }}" style="width:300px;">
+    <p><strong>Category:</strong> {{ item['category'] }}</p>
+    <p><strong>Description:</strong> {{ item['description'] }}</p>
+    <p><strong>Price:</strong> {{ item['price'] }}</p>
+
+    {% if item['category'] == 'vehicles' %}
+        <p><strong>Type:</strong> {{ item.get('type', 'N/A') }}</p>
+        <p><strong>Brand:</strong> {{ item.get('brand', 'N/A') }}</p>
+        <p><strong>Model:</strong> {{ item.get('model', 'N/A') }}</p>
+        <p><strong>Year:</strong> {{ item.get('year', 'N/A') }}</p>
+        <p><strong>Color:</strong> {{ item.get('color', 'N/A') }}</p>
+        <p><strong>Engine Displacement:</strong> {{ item.get('engine_displacement', 'N/A') }}</p>
+        <p><strong>Fuel Type:</strong> {{ item.get('fuel_type', 'N/A') }}</p>
+        <p><strong>Transmission Type:</strong> {{ item.get('transmission_type', 'N/A') }}</p>
+        <p><strong>Mileage:</strong> {{ item.get('mileage', 'N/A') }}</p>
+    {% elif item['category'] == 'computers' %}
+        <p><strong>Type:</strong> {{ item.get('type', 'N/A') }}</p>
+        <p><strong>Brand:</strong> {{ item.get('brand', 'N/A') }}</p>
+        <p><strong>Model:</strong> {{ item.get('model', 'N/A') }}</p>
+        <p><strong>Year:</strong> {{ item.get('year', 'N/A') }}</p>
+        <p><strong>Processor:</strong> {{ item.get('processor', 'N/A') }}</p>
+        <p><strong>RAM:</strong> {{ item.get('ram', 'N/A') }}</p>
+        <p><strong>Storage:</strong> {{ item.get('storage', 'N/A') }}</p>
+        <p><strong>Graphics Card:</strong> {{ item.get('graphics_card', 'N/A') }}</p>
+        <p><strong>Operating System:</strong> {{ item.get('operating_system', 'N/A') }}</p>
+    {% elif item['category'] == 'phones' %}
+        <p><strong>Brand:</strong> {{ item.get('brand', 'N/A') }}</p>
+        <p><strong>Model:</strong> {{ item.get('model', 'N/A') }}</p>
+        <p><strong>Year:</strong> {{ item.get('year', 'N/A') }}</p>
+        <p><strong>Operating system:</strong> {{ item.get('operating_system', 'N/A') }}</p>
+        <p><strong>Processor:</strong> {{ item.get('processor', 'N/A') }}</p>
+        <p><strong>RAM:</strong> {{ item.get('ram', 'N/A') }}</p>
+        <p><strong>Storage:</strong> {{ item.get('storage', 'N/A') }}</p>
+        <p><strong>Camera Specifications:</strong> {{ item.get('camera_spesifications', 'N/A') }}</p>
+        <p><strong>Battery Capacity:</strong> {{ item.get('battery_capacity', 'N/A') }}</p>
+    {% elif item['category'] == 'private lessons' %}
+        <p><strong>Tutor Name:</strong> {{ item.get('tutor_name', 'N/A') }}</p>
+        <p><strong>Lessons:</strong> {{ item.get('lessons', 'N/A') }}</p>
+        <p><strong>Location:</strong> {{ item.get('location', 'N/A') }}</p>
+        <p><strong>Duration:</strong> {{ item.get('duration', 'N/A') }}</p>
+    {% endif %}
+
+    {% if user %}
+    <h3>Contact Information</h3>
+    <p>Email: {{ user['email'] }}</p>
+    <p>Phone: {{ user['phone'] }}</p>
+    {% else %}
+    <p>Contact information available for registered users.</p>
+    {% endif %}
+
+    <a href="/">Back to Home</a>
+</body>
+</html>
