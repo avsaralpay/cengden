@@ -8,6 +8,7 @@
     function showFields() {
         var category = document.getElementById("category").value;
         var fields = document.getElementsByClassName("field");
+
         for (var i = 0; i < fields.length; i++) {
             fields[i].style.display = "none";
             var inputs = fields[i].getElementsByTagName('input');
@@ -45,13 +46,21 @@
         showFields();
         document.getElementById('category').addEventListener('change', showFields);
         
-        // Move this inside the Phones category display logic
+        
+        var addLessonButton = document.getElementById('addLesson');
+        if (addLessonButton) {
+            addLessonButton.addEventListener('click', function() {
+                var newField = document.createElement("div");
+                newField.innerHTML = '<input type="text" name="lessons[]" placeholder="Lesson topic" required>';
+                document.getElementById('lessons').appendChild(newField);
+            });
+        }  
         var addCameraSpecButton = document.getElementById('addCameraSpec');
         if (addCameraSpecButton) {
             addCameraSpecButton.addEventListener('click', function() {
                 var newField = document.createElement("div");
                 newField.innerHTML = '<input type="text" name="camera_specs_type[]" placeholder="Type" required> <input type="text" name="camera_specs_mp[]" placeholder="MP" required>';
-                document.getElementById('cameraSpecifications').appendChild(newField);
+                document.getElementById('camera_specifications').appendChild(newField);
             });
         }
     };
@@ -191,7 +200,7 @@
         <label for="storage_phones">Storage:</label>
         <input type="text" name="storage" id="storage" required><br>
 
-        <div id="camera_spesifications">
+        <div id="camera_specifications">
             <label>Camera Specifications:</label>
             <button type="button" id="addCameraSpec">Add Camera Specification</button>
         </div>
@@ -217,8 +226,10 @@
         <label for="tutor_name">Tutor Name:</label>
         <input type="text" name="tutor_name" id="tutor_name" required><br>
 
-        <label for="lessons_offered">Lessons:</label>
-        <input type="text" name="lessons_offered" id="lessons_offered" required><br>
+         <div id="lessonSpecifications">
+            <label>Lessons:</label>
+         <button type="button" id="addLesson">Add Lesson</button>
+        </div>
 
         <label for="location">Location:</label>
         <input type="text" name="location" id="location" required><br>

@@ -189,7 +189,7 @@ def additem():
                 'processor': request.form.get('processor'),
                 'ram': request.form.get('ram'),
                 'storage': request.form.get('storage'),
-                'camera_specs': camera_specs,
+                'camera_specifications': camera_specs,
                 'battery_capacity': request.form.get('battery_capacity'),
             })
         elif category == 'lessons':
