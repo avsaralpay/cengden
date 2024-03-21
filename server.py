@@ -142,68 +142,49 @@ def additem():
     category = request.form.get('category')
     # Depending on the category, extract the relevant fields
     if request.method == 'POST':
-        item_data = {
-            'category': category,
-            'user_email': session['email'],  # Associate item with the user's email
-            # Common fields across all categories   
-            'title': request.form.get('title'),
-            'price': request.form.get('price'),
-            'description': request.form.get('description'),
-            'image_link': request.form.get('image_link'),
-        }
+        category = request.form.get('category')
+        title = request.form.get('title', '').strip()
+        price = request.form.get('price', '').strip()
+        description = request.form.get('description', '').strip()
+        image_link = request.form.get('image_link', '').strip()
         item_data['timestamp'] = datetime.utcnow()
-        additional_fields = {}
         
         # Handle additional fields based on category
-        if category == 'vehicles':
-            additional_fields = {
-                'type': request.form.get('type'),
-                'brand': request.form.get('brand'),
-                'model': request.form.get('model'),
-                'year': request.form.get('year'),
-                'color': request.form.get('color'),
-                'engine_displacement': request.form.get('engine_displacement'),
-                'fuel_type': request.form.get('fuel_type'),
-                'transmission_type': request.form.get('transmission_type'),
-                'mileage': request.form.get('mileage'),
-            }
-        elif category == 'computers':
-            additional_fields = {
-                'type': request.form.get('type'),
-                'brand': request.form.get('brand'),
-                'model': request.form.get('model'),
-                'year': request.form.get('year'),
-                'processor': request.form.get('processor'),
-                'ram': request.form.get('ram'),
-                'storage': request.form.get('storage'),
-                'graphics_card': request.form.get('graphics_card'),
-                'operating_system': request.form.get('operating_system'),
-            }
-        elif category == 'phones':
-            camera_specs_type = request.form.getlist('camera_specs_type[]')
-            camera_specs_mp = request.form.getlist('camera_specs_mp[]')
-            camera_specs = [{'Type': t, 'MP': mp} for t, mp in zip(camera_specs_type, camera_specs_mp)]
-            additional_fields = {
-                'brand': request.form.get('brand'),
-                'model': request.form.get('model'),
-                'year': request.form.get('year'),
-                'operating_system': request.form.get('operating_system'),
-                'processor': request.form.get('processor'),
-                'ram': request.form.get('ram'),
-                'storage': request.form.get('storage'),
-                'camera_specifications': camera_specs,
-                'battery_capacity': request.form.get('battery_capacity'),
-            }
-        elif category == 'lessons':
-            lesson_type = request.form.getlist('lesson_type[]')
-            lesson_list = [{'Type': t} for t in lesson_type]
-            additional_fields = {
-                'tutor_name': request.form.get('tutor_name'),
-                'lessons': lesson_list,
-                'location': request.form.get('location'),
-                'duration': request.form.get('duration'),
-            }
-        item_data.update({k: v for k, v in additional_fields.items() if v is not None})
+        item_data = {
+            'category': category,
+            'user_email': session['email'],
+            'title': title,
+            'price': price,
+            'description': description,
+            'timestamp': datetime.utcnow()
+        }
+
+        # Only add image link if it's provided
+        if image_link:
+            item_data['image_link'] = image_link
+
+        # Add category-specific fields if they are non-empty
+        category_fields = {
+            'vehicles': ['type', 'brand', 'model', 'year', 'color', 'engine_displacement', 'fuel_type', 'transmission_type', 'mileage'],
+            'phones': ['brand', 'model', 'year', 'operating_system', 'processor', 'ram', 'storage', 'battery_capacity'],
+            'computers': ['type', 'brand', 'model', 'year', 'processor', 'ram', 'storage', 'graphics_card', 'operating_system'],
+            'lessons': ['title', 'tutor_name','location','duration']
+            # Add other categories as needed
+        }
+
+        # Add category-specific fields to item_data if they exist and are not empty
+        for field in category_fields.get(category, []):
+            field_value = request.form.get(field, '').strip()
+            if field_value:
+                item_data[field] = field_value
+
+        # Special handling for arrays like camera specifications
+        if category == 'phones':
+            camera_specs = [{'Type': t.strip(), 'MP': mp.strip()} for t, mp in zip(request.form.getlist('camera_specs_type[]'), request.form.getlist('camera_specs_mp[]')) if t.strip() and mp.strip()]
+            if camera_specs:
+                item_data['camera_specifications'] = camera_specs
+
+        # Insert cleaned item data into the database
         mongo.db.items.insert_one(item_data)
         return redirect(url_for('index'))
     else:
