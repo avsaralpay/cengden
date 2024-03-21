@@ -35,7 +35,11 @@
     <div class="item-container">
     <h2>{{ item['title'] }}</h2>
     <div class= "item-image">
-    <img src="{{ item['image_link'] }}" alt="{{ item['title'] }}" style="width:300px;">
+        {% if item.get('image_link') %}
+        <img src="{{ item['image_link'] }}" alt="{{ item['title'] }}" style="width:300px;">
+    {% else %}
+        <p>"{{item['title']}}"</p>
+    {% endif %}
     </div>
     <div class="item-details">
         <p><strong>Category:</strong> {{ item['category'] }}</p>
