@@ -183,6 +183,13 @@ def additem():
             if camera_specs:
                 item_data['camera_specifications'] = camera_specs
 
+        if category == 'lessons':
+            lesson_topics = request.form.getlist('lessons[]')  # Assuming the form fields for lessons are named 'lessons[]'
+            clean_lesson_topics = [topic.strip() for topic in lesson_topics if topic.strip()]  # Remove empty or whitespace-only topics
+
+            if clean_lesson_topics:
+                item_data['lessons'] = clean_lesson_topics  # Only add the lessons list if it's not empty
+
         # Insert cleaned item data into the database
         mongo.db.items.insert_one(item_data)
         return redirect(url_for('index'))
