@@ -147,7 +147,6 @@ def additem():
         price = request.form.get('price', '').strip()
         description = request.form.get('description', '').strip()
         image_link = request.form.get('image_link', '').strip()
-        item_data['timestamp'] = datetime.utcnow()
         
         # Handle additional fields based on category
         item_data = {
@@ -168,7 +167,7 @@ def additem():
             'vehicles': ['type', 'brand', 'model', 'year', 'color', 'engine_displacement', 'fuel_type', 'transmission_type', 'mileage'],
             'phones': ['brand', 'model', 'year', 'operating_system', 'processor', 'ram', 'storage', 'battery_capacity'],
             'computers': ['type', 'brand', 'model', 'year', 'processor', 'ram', 'storage', 'graphics_card', 'operating_system'],
-            'lessons': ['title', 'tutor_name','location','duration']
+            'lessons': ['tutor_name','location','duration']
             # Add other categories as needed
         }
 
