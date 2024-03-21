@@ -152,9 +152,11 @@ def additem():
             'image_link': request.form.get('image_link'),
         }
         item_data['timestamp'] = datetime.utcnow()
+        additional_fields = {}
+        
         # Handle additional fields based on category
         if category == 'vehicles':
-            item_data.update({
+            additional_fields = {
                 'type': request.form.get('type'),
                 'brand': request.form.get('brand'),
                 'model': request.form.get('model'),
@@ -164,9 +166,9 @@ def additem():
                 'fuel_type': request.form.get('fuel_type'),
                 'transmission_type': request.form.get('transmission_type'),
                 'mileage': request.form.get('mileage'),
-            })
+            }
         elif category == 'computers':
-            item_data.update({
+            additional_fields = {
                 'type': request.form.get('type'),
                 'brand': request.form.get('brand'),
                 'model': request.form.get('model'),
@@ -176,12 +178,12 @@ def additem():
                 'storage': request.form.get('storage'),
                 'graphics_card': request.form.get('graphics_card'),
                 'operating_system': request.form.get('operating_system'),
-            })
+            }
         elif category == 'phones':
             camera_specs_type = request.form.getlist('camera_specs_type[]')
             camera_specs_mp = request.form.getlist('camera_specs_mp[]')
             camera_specs = [{'Type': t, 'MP': mp} for t, mp in zip(camera_specs_type, camera_specs_mp)]
-            item_data.update({
+            additional_fields = {
                 'brand': request.form.get('brand'),
                 'model': request.form.get('model'),
                 'year': request.form.get('year'),
@@ -191,19 +193,22 @@ def additem():
                 'storage': request.form.get('storage'),
                 'camera_specifications': camera_specs,
                 'battery_capacity': request.form.get('battery_capacity'),
-            })
+            }
         elif category == 'lessons':
-            item_data.update({
+            lesson_type = request.form.getlist('lesson_type[]')
+            lesson_list = [{'Type': t} for t in lesson_type]
+            additional_fields = {
                 'tutor_name': request.form.get('tutor_name'),
-                'lessons': request.form.get('lessons_offered'),
+                'lessons': lesson_list,
                 'location': request.form.get('location'),
                 'duration': request.form.get('duration'),
-            })
+            }
+        item_data.update({k: v for k, v in additional_fields.items() if v is not None})
+        mongo.db.items.insert_one(item_data)
+        return redirect(url_for('index'))
     else:
         return render_template('additem.html')
-    # Insert item data into the database
-    mongo.db.items.insert_one(item_data)
-    return redirect(url_for('index'))
+ 
 
 @app.route('/item/<item_id>')
 def item_detail(item_id):
