@@ -41,43 +41,60 @@
         <p><strong>Category:</strong> {{ item['category'] }}</p>
         <p><strong>Description:</strong> {{ item['description'] }}</p>
         <p><strong>Price:</strong> {{ item['price'] }}</p>
+        <div>
+            {% if item['category'] == 'vehicles' %}
+                {% if item.get('type') %}<p><strong>Type:</strong> {{ item['type'] }}</p>{% endif %}
+                {% if item.get('brand') %}<p><strong>Brand:</strong> {{ item['brand'] }}</p>{% endif %}
+                {% if item.get('model') %}<p><strong>Model:</strong> {{ item['model'] }}</p>{% endif %}
+                {% if item.get('year') %}<p><strong>Year:</strong> {{ item['year'] }}</p>{% endif %}
+                {% if item.get('color') %}<p><strong>Color:</strong> {{ item['color'] }}</p>{% endif %}
+                {% if item.get('engine_displacement') %}<p><strong>Engine Displacement:</strong> {{ item['engine_displacement'] }}</p>{% endif %}
+                {% if item.get('fuel_type') %}<p><strong>Fuel Type:</strong> {{ item['fuel_type'] }}</p>{% endif %}
+                {% if item.get('transmission_type') %}<p><strong>Transmission Type:</strong> {{ item['transmission_type'] }}</p>{% endif %}
+                {% if item.get('mileage') %}<p><strong>Mileage:</strong> {{ item['mileage'] }}</p>{% endif %}
 
-        {% if item['category'] == 'vehicles' %}
-            <p><strong>Type:</strong> {{ item.get('type', 'N/A') }}</p>
-            <p><strong>Brand:</strong> {{ item.get('brand', 'N/A') }}</p>
-            <p><strong>Model:</strong> {{ item.get('model', 'N/A') }}</p>
-            <p><strong>Year:</strong> {{ item.get('year', 'N/A') }}</p>
-            <p><strong>Color:</strong> {{ item.get('color', 'N/A') }}</p>
-            <p><strong>Engine Displacement:</strong> {{ item.get('engine_displacement', 'N/A') }}</p>
-            <p><strong>Fuel Type:</strong> {{ item.get('fuel_type', 'N/A') }}</p>
-            <p><strong>Transmission Type:</strong> {{ item.get('transmission_type', 'N/A') }}</p>
-            <p><strong>Mileage:</strong> {{ item.get('mileage', 'N/A') }}</p>
-        {% elif item['category'] == 'computers' %}
-            <p><strong>Type:</strong> {{ item.get('type', 'N/A') }}</p>
-            <p><strong>Brand:</strong> {{ item.get('brand', 'N/A') }}</p>
-            <p><strong>Model:</strong> {{ item.get('model', 'N/A') }}</p>
-            <p><strong>Year:</strong> {{ item.get('year', 'N/A') }}</p>
-            <p><strong>Processor:</strong> {{ item.get('processor', 'N/A') }}</p>
-            <p><strong>RAM:</strong> {{ item.get('ram', 'N/A') }}</p>
-            <p><strong>Storage:</strong> {{ item.get('storage', 'N/A') }}</p>
-            <p><strong>Graphics Card:</strong> {{ item.get('graphics_card', 'N/A') }}</p>
-            <p><strong>Operating System:</strong> {{ item.get('operating_system', 'N/A') }}</p>
-        {% elif item['category'] == 'phones' %}
-            <p><strong>Brand:</strong> {{ item.get('brand', 'N/A') }}</p>
-            <p><strong>Model:</strong> {{ item.get('model', 'N/A') }}</p>
-            <p><strong>Year:</strong> {{ item.get('year', 'N/A') }}</p>
-            <p><strong>Operating system:</strong> {{ item.get('operating_system', 'N/A') }}</p>
-            <p><strong>Processor:</strong> {{ item.get('processor', 'N/A') }}</p>
-            <p><strong>RAM:</strong> {{ item.get('ram', 'N/A') }}</p>
-            <p><strong>Storage:</strong> {{ item.get('storage', 'N/A') }}</p>
-            <p><strong>Camera Specifications:</strong> {{ item.get('camera_spesifications', 'N/A') }}</p>
-            <p><strong>Battery Capacity:</strong> {{ item.get('battery_capacity', 'N/A') }}</p>
-        {% elif item['category'] == 'private lessons' %}
-            <p><strong>Tutor Name:</strong> {{ item.get('tutor_name', 'N/A') }}</p>
-            <p><strong>Lessons:</strong> {{ item.get('lessons', 'N/A') }}</p>
-            <p><strong>Location:</strong> {{ item.get('location', 'N/A') }}</p>
-            <p><strong>Duration:</strong> {{ item.get('duration', 'N/A') }}</p>
-        {% endif %}
+            {% elif item['category'] == 'computers' %}
+                {% if item.get('type') %}<p><strong>Type:</strong> {{ item['type'] }}</p>{% endif %}
+                {% if item.get('brand') %}<p><strong>Brand:</strong> {{ item['brand'] }}</p>{% endif %}
+                {% if item.get('model') %}<p><strong>Model:</strong> {{ item['model'] }}</p>{% endif %}
+                {% if item.get('year') %}<p><strong>Year:</strong> {{ item['year'] }}</p>{% endif %}
+                {% if item.get('processor') %}<p><strong>Processor:</strong> {{ item['processor'] }}</p>{% endif %}
+                {% if item.get('ram') %}<p><strong>RAM:</strong> {{ item['ram'] }}</p>{% endif %}
+                {% if item.get('storage') %}<p><strong>Storage:</strong> {{ item['storage'] }}</p>{% endif %}
+                {% if item.get('graphics_card') %}<p><strong>Graphics Card:</strong> {{ item['graphics_card'] }}</p>{% endif %}
+                {% if item.get('operating_system') %}<p><strong>Operating System:</strong> {{ item['operating_system'] }}</p>{% endif %}
+
+            {% elif item['category'] == 'phones' %}
+                {% if item.get('brand') %}<p><strong>Brand:</strong> {{ item['brand'] }}</p>{% endif %}
+                {% if item.get('model') %}<p><strong>Model:</strong> {{ item['model'] }}</p>{% endif %}
+                {% if item.get('year') %}<p><strong>Year:</strong> {{ item['year'] }}</p>{% endif %}
+                {% if item.get('operating_system') %}<p><strong>Operating system:</strong> {{ item['operating_system'] }}</p>{% endif %}
+                {% if item.get('processor') %}<p><strong>Processor:</strong> {{ item['processor'] }}</p>{% endif %}
+                {% if item.get('ram') %}<p><strong>RAM:</strong> {{ item['ram'] }}</p>{% endif %}
+                {% if item.get('storage') %}<p><strong>Storage:</strong> {{ item['storage'] }}</p>{% endif %}
+                {% if item.get('camera_specifications') %}
+                    <p><strong>Camera Specifications:</strong></p>
+                    <ul>
+                        {% for spec in item['camera_specifications'] %}
+                            <li>Type: {{ spec['Type'] }}, MP: {{ spec['MP'] }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% if item.get('battery_capacity') %}<p><strong>Battery Capacity:</strong> {{ item['battery_capacity'] }}</p>{% endif %}
+
+            {% elif item['category'] == 'private lessons' %}
+                {% if item.get('tutor_name') %}<p><strong>Tutor Name:</strong> {{ item['tutor_name'] }}</p>{% endif %}
+                {% if item.get('lessons') %}
+                    <p><strong>Lessons:</strong></p>
+                    <ul>
+                        {% for lesson in item['lessons'] %}
+                            <li>{{ lesson }}</li>
+                        {%  endfor %}
+                    </ul>
+                {% endif %}
+                {% if item.get('location') %}<p><strong>Location:</strong> {{ item['location'] }}</p>{% endif %}
+                {% if item.get('duration') %}<p><strong>Duration:</strong> {{ item['duration'] }}</p>{% endif %}
+
     </div>
     {% if user %}
     <div class="contact-info">
