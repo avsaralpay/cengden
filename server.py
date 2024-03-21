@@ -124,7 +124,7 @@ def register():
                     'verification_code': verification_code,
                     'name': request.form['name'],
                     'phone': request.form['phone'],
-                    'password': bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
+                    'password': bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt()),
                     'role': 'authenticated_user'
                 })
             send_verification_email(email, request.form['name'], verification_code)
