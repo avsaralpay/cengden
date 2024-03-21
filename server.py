@@ -125,6 +125,7 @@ def register():
                     'name': request.form['name'],
                     'phone': request.form['phone'],
                     'password': bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
+                    'role': 'authenticated_user'
                 })
             send_verification_email(email, request.form['name'], verification_code)
             session['email'] = email  # Consider using a more specific session key for email
