@@ -86,12 +86,22 @@
             {% endif %}
 
             {% if item['category'] == 'private lessons' %}
-                {% if item.get('tutor_name') %}<p><strong>Tutor Name:</strong> {{ item['tutor_name'] }}</p>{% endif %}
-                {% if item.get('lessons') %}
-                    <p><strong>Lessons:</strong> {{ item['lessons']|join(', ') }}</p>
+                {% if item.get('tutor_name') %}
+                    <p><strong>Tutor Name:</strong> {{ item['tutor_name'] }}</p>
                 {% endif %}
-                {% if item.get('location') %}<p><strong>Location:</strong> {{ item['location'] }}</p>{% endif %}
-                {% if item.get('duration') %}<p><strong>Duration:</strong> {{ item['duration'] }}</p>{% endif %}
+                {% if item.get('lessons') %}
+                    <p><strong>Lessons:</strong>
+                    {% for lesson in item['lessons'] %}
+                        {{ lesson }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                    </p>
+                {% endif %}
+                {% if item.get('location') %}
+                    <p><strong>Location:</strong> {{ item['location'] }}</p>
+                {% endif %}
+                {% if item.get('duration') %}
+                    <p><strong>Duration:</strong> {{ item['duration'] }}</p>
+                {% endif %}
             {% endif %}
     </div>
     
