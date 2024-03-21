@@ -54,7 +54,7 @@
                 {% if item.get('mileage') %}<p><strong>Mileage:</strong> {{ item['mileage'] }}</p>{% endif %}
             {% endif %}
 
-            {% elif item['category'] == 'computers' %}
+            {% if item['category'] == 'computers' %}
                 {% if item.get('type') %}<p><strong>Type:</strong> {{ item['type'] }}</p>{% endif %}
                 {% if item.get('brand') %}<p><strong>Brand:</strong> {{ item['brand'] }}</p>{% endif %}
                 {% if item.get('model') %}<p><strong>Model:</strong> {{ item['model'] }}</p>{% endif %}
@@ -66,7 +66,7 @@
                 {% if item.get('operating_system') %}<p><strong>Operating System:</strong> {{ item['operating_system'] }}</p>{% endif %}
             {% endif %}
 
-            {% elif item['category'] == 'phones' %}
+            {% if item['category'] == 'phones' %}
                 {% if item.get('brand') %}<p><strong>Brand:</strong> {{ item['brand'] }}</p>{% endif %}
                 {% if item.get('model') %}<p><strong>Model:</strong> {{ item['model'] }}</p>{% endif %}
                 {% if item.get('year') %}<p><strong>Year:</strong> {{ item['year'] }}</p>{% endif %}
@@ -85,7 +85,7 @@
                 {% if item.get('battery_capacity') %}<p><strong>Battery Capacity:</strong> {{ item['battery_capacity'] }}</p>{% endif %}
             {% endif %}
 
-            {% elif item['category'] == 'private lessons' %}
+            {% if item['category'] == 'private lessons' %}
                 {% if item.get('tutor_name') %}<p><strong>Tutor Name:</strong> {{ item['tutor_name'] }}</p>{% endif %}
                 {% if item.get('lessons') %}
                     <p><strong>Lessons:</strong></p>
