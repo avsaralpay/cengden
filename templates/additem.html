@@ -8,66 +8,48 @@
     function showFields() {
         var category = document.getElementById("category").value;
         var fields = document.getElementsByClassName("field");
-
         for (var i = 0; i < fields.length; i++) {
             fields[i].style.display = "none";
-            var inputs = fields[i].getElementsByTagName('input');
-            for (var j = 0; j < inputs.length; j++) {
-                inputs[j].disabled = true;
-            }
-            var selects = fields[i].getElementsByTagName('select');
-            for (var k = 0; k < selects.length; k++) {
-                selects[k].disabled = true;
-            }
-            var textareas = fields[i].getElementsByTagName('textarea');
-            for (var l = 0; l < textareas.length; l++) {
-                textareas[l].disabled = true;
-            }
+            disableFields(fields[i], true);  // Disable fields
         }
         var relevantFields = document.getElementsByClassName(category);
-        for (var i = 0; i < relevantFields.length; i++) {
-            relevantFields[i].style.display = "block";
-            var inputs = relevantFields[i].getElementsByTagName('input');
-            for (var j = 0; j < inputs.length; j++) {
-                inputs[j].disabled = false;
-            }
-            var selects = relevantFields[i].getElementsByTagName('select');
-            for (var k = 0; k < selects.length; k++) {
-                selects[k].disabled = false;
-            }
-            var textareas = relevantFields[i].getElementsByTagName('textarea');
-            for (var l = 0; l < textareas.length; l++) {
-                textareas[l].disabled = false;
-            }
+        for (var m = 0; m < relevantFields.length; m++) {
+            relevantFields[m].style.display = "block";
+            disableFields(relevantFields[m], false);  // Enable fields
         }
     }
-    
-    window.onload = function() {
-    showFields(); // existing functionality
-    document.getElementById('category').addEventListener('change', showFields);
 
-    var addCameraSpecButton = document.getElementById('addCameraSpec');
-    if (addCameraSpecButton) {
-        addCameraSpecButton.addEventListener('click', function(event) {
-            event.preventDefault();
-            console.log("Adding new camera specification field"); // Add this line for debugging
-            var newField = document.createElement("div");
-            newField.innerHTML = '<input type="text" name="camera_specs_type[]" placeholder="Type" required> <input type="text" name="camera_specs_mp[]" placeholder="MP" required>';
-            document.getElementById('camera_specifications').appendChild(newField);
-        });
+    function disableFields(container, disabled) {
+        var inputs = container.getElementsByTagName('input');
+        var selects = container.getElementsByTagName('select');
+        var textareas = container.getElementsByTagName('textarea');
+        for (var item of [...inputs, ...selects, ...textareas]) {
+            item.disabled = disabled;
+        }
     }
 
-    var addLessonButton = document.getElementById('addLesson');
-    if (addLessonButton) {
-        addLessonButton.addEventListener('click', function() {
-            var newField = document.createElement("div");
-            newField.innerHTML = '<input type="text" name="lessons[]" placeholder="Lesson topic" required>';
-            document.getElementById('lessonSpecifications').appendChild(newField);
-        });
-    }
-};
+    document.addEventListener('DOMContentLoaded', function() {
+        showFields(); // existing functionality
+        document.getElementById('category').addEventListener('change', showFields);
 
+        document.body.addEventListener('click', function(event) {
+            if (event.target.id === 'addCameraSpec') {
+                event.preventDefault(); // Prevent form submission or any default action
+                console.log("Adding new camera specification field");
+                var newField = document.createElement("div");
+                newField.innerHTML = '<input type="text" name="camera_specs_type[]" placeholder="Type" required> <input type="text" name="camera_specs_mp[]" placeholder="MP" required>';
+                document.getElementById('camera_specifications').appendChild(newField);
+            } else if (event.target.id === 'addLesson') {
+                event.preventDefault();
+                console.log("Adding new lesson field");
+                var newField = document.createElement("div");
+                newField.innerHTML = '<input type="text" name="lessons[]" placeholder="Lesson topic" required>';
+                document.getElementById('lessonSpecifications').appendChild(newField);
+            }
+        });
+    });
 </script>
+
 </head>
 <body onload="showFields()"> <!-- Ensure fields are correctly shown/hidden on page load -->
 <h2>Add New Item</h2>
