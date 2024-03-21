@@ -189,7 +189,7 @@ def additem():
 
             if clean_lesson_topics:
                 item_data['lessons'] = clean_lesson_topics  # Only add the lessons list if it's not empty
-
+                print(item_data['lessons'])
         # Insert cleaned item data into the database
         mongo.db.items.insert_one(item_data)
         return redirect(url_for('index'))
