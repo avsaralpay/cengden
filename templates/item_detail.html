@@ -32,16 +32,13 @@
     </style>
 </head>
 <body>
-    <<div class="item-container">
+    <div class="item-container">
         <h2>{{ item['title'] }}</h2>
-        <div class="item-image">
-            {% if item.get('image_link') %}
-                <img src="{{ item['image_link'] }}" style="width:300px;">
-                <p>{{ item['title'] }}</p>
-            {% else %}
-                <p>{{ item['title'] }}</p>
-            {% endif %}
-        </div>
+        {% if item.get('image_link') %}
+            <div class="item-image">
+                <img src="{{ item['image_link'] }}" alt="{{ item['title'] }}" style="width:300px;">
+            </div>
+        {% endif %}
     </div>
     <div class="item-details">
         <p><strong>Category:</strong> {{ item['category'] }}</p>
