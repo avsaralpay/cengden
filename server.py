@@ -178,6 +178,9 @@ def additem():
                 'operating_system': request.form.get('operating_system'),
             })
         elif category == 'phones':
+            camera_specs_type = request.form.getlist('camera_specs_type[]')
+            camera_specs_mp = request.form.getlist('camera_specs_mp[]')
+            camera_specs = [{'Type': t, 'MP': mp} for t, mp in zip(camera_specs_type, camera_specs_mp)]
             item_data.update({
                 'brand': request.form.get('brand'),
                 'model': request.form.get('model'),
@@ -186,7 +189,7 @@ def additem():
                 'processor': request.form.get('processor'),
                 'ram': request.form.get('ram'),
                 'storage': request.form.get('storage'),
-                'camera_specifications': request.form.get('camera_specifications'),
+                'camera_specs': camera_specs,
                 'battery_capacity': request.form.get('battery_capacity'),
             })
         elif category == 'lessons':
