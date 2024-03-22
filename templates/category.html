@@ -121,11 +121,12 @@
     <h2>Items in {{ category }}</h2>
         <div class="items">
             {% for item in items %}
-            <div>
-                <a href="/item/{{ item['_id'] }}">{{ item['title'] }}</a>
+            <div class="item">
+                <a href="/item/{{ item['_id'] }}">
                     {% if item.get('image_link') %}
-                    <img src="{{ item['image_link'] }}" alt="{{ item['title'] }}" style="width:200px;height:200px;">
+                    <img src="{{ item['image_link'] }}" alt="{{ item['title'] }}">
                     {% endif %}
+                    <div>{{ item['title'] }}</div>
                 </a>
             </div>
             {% endfor %}
