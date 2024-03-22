@@ -4,14 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CENGden</title>
-    <script>
-        function confirmDelete(itemId) {
-            var confirmation = confirm("Are you sure you want to delete this item?");
-            if (confirmation) {
-                window.location.href = `/delete_item/${itemId}`;
-            }
-        }
-    </script>
     
     <style>
         body {
@@ -102,6 +94,25 @@
     </style>
 </head>
 <body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var deleteButtons = document.querySelectorAll('.delete-item');
+            deleteButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    var itemId = this.getAttribute('data-item-id');
+                    confirmDelete(itemId);
+                });
+            });
+        });
+    
+        function confirmDelete(itemId) {
+            var confirmation = confirm("Are you sure you want to delete this item?");
+            if (confirmation) {
+                window.location.href = `/delete_item/${itemId}`;
+            }
+        }
+    </script>
+
     <div class="categories-label">CATEGORIES</div>
     <div class="categories-container">
         <a href="/category/vehicles">Vehicles</a>
@@ -139,7 +150,7 @@
             {% else %}
             <a href="/activate_item/{{ item['_id'] }}">Activate</a>
             {% endif %}
-            <a href="#" onclick="confirmDelete('{{ item['_id']}}'); return false;">Delete</a>
+            <a href="javascript:void(0);" class="delete-item" data-item-id="{{ item['_id'] }}">Delete</a>
             {% endif %}
         </div>
         {% endfor %}
