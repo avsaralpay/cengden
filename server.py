@@ -62,19 +62,16 @@ def verify():
         return render_template('verify.html', error=error_message, email=email)
 
 @app.route('/')
-@app.route('/items')  # To display user's items when they click "My Items"
 def index():
-    
-    if 'email' in session and request.path == '/':  # Check if user is logged in and requested "My Items"
-        items = mongo.db.items.find({'active': True}).sort("timestamp", -1)  # -1 for descending order
-        myitems = False
+    # This route will show all active items to any user
+    items = mongo.db.items.find({'active': True}).sort("timestamp", -1)
+    return render_template('index.html', items=list(items), myitems=False)
 
-    if 'email' in session and request.path == '/items':  # Check if user is logged in and requested "My Items"
-        items = mongo.db.items.find({'user_email': session['email']}).sort("timestamp", -1)
-        myitems = True  # Flag to indicate this is the "My Items" view
-    
-    return render_template('index.html', items=list(items), myitems=myitems)
-
+@app.route('/items')
+def my_items():
+    # Find items posted by the logged-in user
+    items = mongo.db.items.find({'user_email': session['email']}).sort("timestamp", -1)
+    return render_template('index.html', items=list(items), myitems=True)
 
 @app.route('/category/<category_name>')
 def category(category_name):
