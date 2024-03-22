@@ -11,7 +11,6 @@ import string
 from datetime import datetime
 from bson.objectid import ObjectId
 
-
 app = Flask(__name__)
 app.secret_key = 'secret_key'
 app.config['MONGO_DBNAME'] = 'cengden'
@@ -72,6 +71,20 @@ def my_items():
     # Find items posted by the logged-in user
     items = mongo.db.items.find({'user_email': session['email']}).sort("timestamp", -1)
     return render_template('index.html', items=list(items), myitems=True)
+
+@app.route('/delete_item/<item_id>')
+def delete_item(item_id):
+    if 'email' not in session:
+        return redirect(url_for('login'))  # Ensure user is logged in
+
+    # Fetch the item to check if the current user is the owner
+    item = mongo.db.items.find_one({'_id': ObjectId(item_id)})
+
+    # Check if the item exists and the logged-in user is the owner
+    if item and session['email'] == item.get('user_email'):
+        mongo.db.items.delete_one({'_id': ObjectId(item_id)})
+
+    return redirect(url_for('index'))  # Redirect user after deletion
 
 @app.route('/category/<category_name>')
 def category(category_name):
