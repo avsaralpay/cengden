@@ -64,7 +64,7 @@ def verify():
 @app.route('/')
 @app.route('/items')  # To display user's items when they click "My Items"
 def index():
-    items = mongo.db.items.find().sort("timestamp", -1)  # Default to showing latest items
+    items = mongo.db.items.find({'active': True}).sort("timestamp", -1)  # -1 for descending order
     myitems = False
 
     if 'email' in session and request.path == '/items':  # Check if user is logged in and requested "My Items"
