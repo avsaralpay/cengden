@@ -230,12 +230,24 @@ def my_items():
 
 @app.route('/deactivate_item/<item_id>')
 def deactivate_item(item_id):
-    mongo.db.items.update_one({'_id': ObjectId(item_id)}, {'$set': {'active': False}})
+    if 'email' not in session:
+        return redirect(url_for('login'))  # User must be logged in
+
+    mongo.db.items.update_one(
+        {'_id': ObjectId(item_id), 'user_email': session['email']},
+        {'$set': {'active': False}}
+    )
     return redirect(url_for('my_items'))
 
 @app.route('/activate_item/<item_id>')
 def activate_item(item_id):
-    mongo.db.items.update_one({'_id': ObjectId(item_id)}, {'$set': {'active': True}})
+    if 'email' not in session:
+        return redirect(url_for('login'))  # User must be logged in
+
+    mongo.db.items.update_one(
+        {'_id': ObjectId(item_id), 'user_email': session['email']},
+        {'$set': {'active': True}}
+    )
     return redirect(url_for('my_items'))
 
 @app.route('/account', methods=['GET', 'POST'])
