@@ -217,6 +217,25 @@ def item_detail(item_id):
 
     return render_template('item_detail.html', item=item, user=user_info)
 
+@app.route('/myitems')
+def my_items():
+    if request.endpoint == 'myitems':  # Flask provides request.endpoint to check which endpoint is being accessed
+        user_email = session['email']
+        items = mongo.db.items.find({'user_email': user_email, 'active': True}).sort("timestamp", -1)  # Only fetch active items posted by the user
+    else:
+        items = mongo.db.items.find({'active': True}).sort("timestamp", -1)  # Fetch all active items for the home page
+
+    return render_template('index.html', items=items, myitems=request.endpoint == 'myitems')
+
+@app.route('/deactivate_item/<item_id>')
+def deactivate_item(item_id):
+    mongo.db.items.update_one({'_id': ObjectId(item_id)}, {'$set': {'active': False}})
+    return redirect(url_for('my_items'))
+
+@app.route('/activate_item/<item_id>')
+def activate_item(item_id):
+    mongo.db.items.update_one({'_id': ObjectId(item_id)}, {'$set': {'active': True}})
+    return redirect(url_for('my_items'))
 
 @app.route('/account', methods=['GET', 'POST'])
 def account():

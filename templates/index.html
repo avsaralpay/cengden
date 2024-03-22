@@ -117,19 +117,22 @@
             {% endif %}
         </ul>
     </div>
-    <div class="latest-items">
-        <h2>Latest Items</h2>
-        {% for item in items %}
-        <div class="item">
-            <a href="/item/{{ item['_id'] }}">
-                {% if item.get('image_link') %}
-                    <img src="{{ item['image_link'] }}" alt="{{ item['title'] }}" style="width:100px;height:100px;">
-                {% else %}
-                {% endif %}
-                <div>{{ item['title'] }}</div>
-            </a>
-        </div>
-        {% endfor %}
+    {% for item in items %}
+    <div class="item">
+        <a href="/item/{{ item['_id'] }}">{{ item['title'] }}</a>
+        {% if item.get('image_link') %}
+        <img src="{{ item['image_link'] }}" alt="{{ item['title'] }}" style="width:100px;height:100px;">
+        {% endif %}
+        {% if myitems %}
+        <!-- Display activate/deactivate links only for My Items view -->
+        {% if item.get('active', True) %}
+        <a href="/deactivate_item/{{ item['_id'] }}">Deactivate</a>
+        {% else %}
+        <a href="/activate_item/{{ item['_id'] }}">Activate</a>
+        {% endif %}
+        {% endif %}
+    </div>
+    {% endfor %}
         <div class="pagination">
             <a href="#">Previous</a> <a href="#">1</a> <a href="#">2</a> <a href="#">Next</a>
         </div>
