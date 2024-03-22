@@ -181,7 +181,8 @@ def additem():
         # Only add image link if it's provided
         if image_link:
             item_data['image_link'] = image_link
-
+        else:
+            item_data['image_link'] = 'https://via.placeholder.com/300x200.png?text=No+Image'
         # Add category-specific fields if they are non-empty
         category_fields = {
             'vehicles': ['type', 'brand', 'model', 'year', 'color', 'engine_displacement', 'fuel_type', 'transmission_type', 'mileage'],
