@@ -117,15 +117,14 @@
             {% endif %}
         </ul>
     </div>
+    
     <h2>Items in {{ category }}</h2>
         <div class="items">
-            {% for item in items %}
-            <a href="/item/{{ item['_id'] }}">
-                <img src="{{ item['image_link'] }}" alt="{{ item['title'] }}" style="width:200px;height:200px;">
-                <div>{{ item['title'] }}</div>
-            </a>
-            </div>
-            {% endfor %}
+            <a href="/item/{{ item['_id'] }}">{{ item['title'] }}</a>
+            {% if item.get('image_link') %}
+            <img src="{{ item['image_link'] }}" alt="{{ item['title'] }}" style="width:240px;height:240px;">
+            {% endif %}
+        </div>
         <div class="pagination">
             <a href="#">Previous</a> <a href="#">1</a> <a href="#">2</a> <a href="#">Next</a>
         </div>
