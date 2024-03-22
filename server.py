@@ -62,9 +62,16 @@ def verify():
         return render_template('verify.html', error=error_message, email=email)
 
 @app.route('/')
+@app.route('/items')  # To display user's items when they click "My Items"
 def index():
-    items = mongo.db.items.find().sort("timestamp", -1)  # -1 for descending order
-    return render_template('index.html', items=list(items))
+    items = mongo.db.items.find().sort("timestamp", -1)  # Default to showing latest items
+    myitems = False
+
+    if 'email' in session and request.path == '/items':  # Check if user is logged in and requested "My Items"
+        items = mongo.db.items.find({'user_email': session['email']}).sort("timestamp", -1)
+        myitems = True  # Flag to indicate this is the "My Items" view
+    
+    return render_template('index.html', items=list(items), myitems=myitems)
 
 
 @app.route('/category/<category_name>')
@@ -218,15 +225,6 @@ def item_detail(item_id):
 
     return render_template('item_detail.html', item=item, user=user_info)
 
-@app.route('/myitems')
-def my_items():
-    if request.endpoint == 'myitems':  # Flask provides request.endpoint to check which endpoint is being accessed
-        user_email = session['email']
-        items = mongo.db.items.find({'user_email': user_email, 'active': True}).sort("timestamp", -1)  # Only fetch active items posted by the user
-    else:
-        items = mongo.db.items.find({'active': True}).sort("timestamp", -1)  # Fetch all active items for the home page
-
-    return render_template('index.html', items=items, myitems=request.endpoint == 'myitems')
 
 @app.route('/deactivate_item/<item_id>')
 def deactivate_item(item_id):
