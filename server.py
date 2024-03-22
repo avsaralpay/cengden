@@ -155,7 +155,8 @@ def additem():
             'title': title,
             'price': price,
             'description': description,
-            'timestamp': datetime.utcnow()
+            'timestamp': datetime.utcnow(),
+            'active': True  # Set active status to True by default
         }
 
         # Only add image link if it's provided
