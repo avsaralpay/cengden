@@ -235,7 +235,7 @@ def deactivate_item(item_id):
         {'_id': ObjectId(item_id), 'user_email': session['email']},
         {'$set': {'active': False}}
     )
-    return redirect(url_for('my_items'))
+    return redirect(url_for('index'))
 
 @app.route('/activate_item/<item_id>')
 def activate_item(item_id):
@@ -246,7 +246,7 @@ def activate_item(item_id):
         {'_id': ObjectId(item_id), 'user_email': session['email']},
         {'$set': {'active': True}}
     )
-    return redirect(url_for('my_items'))
+    return redirect(url_for('index'))
 
 @app.route('/account', methods=['GET', 'POST'])
 def account():
