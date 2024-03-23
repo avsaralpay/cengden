@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
     <style>
         body {
@@ -9,60 +10,46 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
-            height: 100vh;
+            flex-direction: column;
             align-items: center;
-        }
-        
-        .admin-header {
             text-align: center;
-            margin: 20px;
-            font-size: 24px;
         }
-        
+        .admin-header {
+            width: 100%;
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
         .admin-container {
             display: flex;
             justify-content: space-around;
             width: 80%;
+            margin-top: 20px;
         }
-
         .admin-section {
-            flex: 1;
-            margin: 0 20px;
+            width: 45%;
         }
-
-        .admin-section h2 {
-            border-bottom: 2px solid #000;
+        h2 {
+            border-bottom: 1px solid #ccc;
             padding-bottom: 10px;
-            margin-bottom: 20px;
         }
-
-        .admin-section ul {
+        ul {
             list-style-type: none;
             padding: 0;
         }
-
-        .admin-section li {
-            margin-bottom: 10px;
-            background: #f4f4f4;
+        li {
+            margin: 10px 0;
+            background-color: #f2f2f2;
             padding: 10px;
             border-radius: 5px;
         }
-
-        .admin-section a {
-            color: red;
+        a {
             text-decoration: none;
+            color: #333;
         }
-
         .back-to-home {
-            position: fixed; /* Fixed at the bottom of the page */
-            bottom: 0;
-            left: 50%; /* Center the link */
-            transform: translateX(-50%); /* Center the link correctly */
-            background-color: #f8f9fa;
-            padding: 10px;
-            width: 100%;
-            text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
