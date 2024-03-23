@@ -108,6 +108,8 @@
         <h1>{{ 'Update' if item else 'Add New' }} Item</h1>
     <hr>
 
+    {% if not is_update %}
+    <!-- For adding new items, allow category selection -->
     <label for="category"><b>Category:</b></label>
     <select name="category" id="category" onchange="showFields()" required>
         <option value="">Select a category</option>
@@ -116,6 +118,12 @@
         <option value="phones">Phones</option>
         <option value="lessons">Private Lessons</option>
     </select>
+    {% else %}
+        <!-- For updating existing items, show category but do not allow changes -->
+        <label for="category"><b>Category:</b></label>
+        <input type="text" id="category_display" value="{{ item['category'] }}" disabled>
+        <input type="hidden" name="category" id="category" value="{{ item['category'] }}">
+    {% endif %}
     <!-- Fields for Vehicles -->
     <div class="field vehicles" style="display:none">
         <label for="title">Title:</label>

@@ -163,6 +163,7 @@ def add_or_update_item(item_id=None):
     if 'email' not in session:
         return redirect(url_for('login'))
     
+    is_update = bool(item_id)  # True if updating, False if adding
     item_data = {}  # Initialize empty dict for new item or updates
     if item_id:
         # For update, find the existing item
@@ -229,7 +230,7 @@ def add_or_update_item(item_id=None):
             mongo.db.items.insert_one(item_data)
         return redirect(url_for('index'))
     else:
-        return render_template('additem.html', item=item)  # Pass existing item data if any
+        return render_template('additem.html', item=item, is_update=is_update)
  
 
 @app.route('/item/<item_id>')
