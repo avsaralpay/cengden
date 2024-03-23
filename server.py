@@ -156,10 +156,22 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/additem', methods=['POST','GET'])
-def additem():
-    category = request.form.get('category')
-    # Depending on the category, extract the relevant fields
+@app.route('/add_or_update_item',methods=['POST','GET']], defaults={'item_id': None})
+@app.route('/add_or_update_item/<item_id>', methods=['POST','GET'])
+def add_or_update_item(item_id=None):
+    # Make sure user is logged in
+    if 'email' not in session:
+        return redirect(url_for('login'))
+    
+    item_data = {}  # Initialize empty dict for new item or updates
+    if item_id:
+        # For update, find the existing item
+        item = mongo.db.items.find_one({'_id': ObjectId(item_id), 'user_email': session['email']})
+        if not item:
+            return redirect(url_for('index'))  # Redirect if item not found or doesn't belong to user
+    else:
+        item = None  # For add, item remains None
+
     if request.method == 'POST':
         category = request.form.get('category')
         title = request.form.get('title', '').strip()
@@ -210,11 +222,14 @@ def additem():
 
             if clean_lesson_topics:
                 item_data['lessons'] = clean_lesson_topics  # Only add the lessons list if it's not empty
-        # Insert cleaned item data into the database
-        mongo.db.items.insert_one(item_data)
+
+        if item_id:
+            mongo.db.items.update_one({'_id': ObjectId(item_id)}, {'$set': item_data})
+        else:
+            mongo.db.items.insert_one(item_data)
         return redirect(url_for('index'))
     else:
-        return render_template('additem.html')
+        return render_template('additem.html', item=item)  # Pass existing item data if any
  
 
 @app.route('/item/<item_id>')

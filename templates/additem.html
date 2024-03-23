@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add Item - CENGden</title>
+<title>{{ is_update and 'Update' or 'Add' }} Item - CENGden</title>
 <style>
     * {box-sizing: border-box;}
 
@@ -104,8 +104,8 @@
 
 </head>
 <body onload="showFields()"> <!-- Ensure fields are correctly shown/hidden on page load -->
-<form action="/additem" method="POST" class="container">
-    <h1>Add New Item</h1>
+<form action="/add_or_update_item{{ '/'+item['_id'] if item else '' }}" method="POST" class="container">
+    <h1>{{ 'Update' if item else 'Add New' }} Item</h1>
     <hr>
 
     <label for="category"><b>Category:</b></label>
@@ -285,7 +285,7 @@
         <textarea name="description" id="description" required></textarea><br>
     </div>
     
-    <button type="submit">Add Item</button>
+    <button type="submit" class="btn">{{ 'Update' if item else 'Add' }} Item</button>
 
 </form>
 </body>

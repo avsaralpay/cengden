@@ -145,6 +145,7 @@
             {% endif %}
         {% if myitems %}
             <!-- Display activate/deactivate links only for My Items view -->
+            <a href="/update_item/{{ item['_id'] }}">Update</a>
             {% if item.get('active', True) %}
             <a href="/deactivate_item/{{ item['_id'] }}">Deactivate</a>
             {% else %}
