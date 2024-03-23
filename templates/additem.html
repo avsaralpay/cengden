@@ -4,6 +4,58 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Add Item - CENGden</title>
+<style>
+    * {box-sizing: border-box;}
+
+    .container {
+        padding: 16px;
+        background-color: white;
+        width: 100%;
+        max-width: 600px;
+        margin: 20px auto;
+    }
+
+    input[type=text], input[type=number], input[type=url], select, textarea {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        background: #f1f1f1;
+    }
+
+    input[type=text]:focus, input[type=number]:focus, input[type=url]:focus, select:focus, textarea:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    .additembtn {
+        background-color: #007bff;
+        color: white;
+        padding: 16px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+    }
+
+    .additembtn:hover {
+        opacity:1;
+    }
+
+    .field {
+        display: none;
+    }
+
+    /* Additional styles */
+</style>
+
 <script>
     function showFields() {
         var category = document.getElementById("category").value;
@@ -52,17 +104,18 @@
 
 </head>
 <body onload="showFields()"> <!-- Ensure fields are correctly shown/hidden on page load -->
-<h2>Add New Item</h2>
-<form action="/additem" method="POST">
-    <label for="category">Category:</label>
-    <select name="category" id="category" onchange="showFields()">
+<form action="/additem" method="POST" class="container">
+    <h1>Add New Item</h1>
+    <hr>
+
+    <label for="category"><b>Category:</b></label>
+    <select name="category" id="category" onchange="showFields()" required>
         <option value="">Select a category</option>
         <option value="vehicles">Vehicles</option>
         <option value="computers">Computers</option>
         <option value="phones">Phones</option>
         <option value="lessons">Private Lessons</option>
     </select>
-    
     <!-- Fields for Vehicles -->
     <div class="field vehicles" style="display:none">
         <label for="title">Title:</label>
