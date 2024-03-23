@@ -121,7 +121,6 @@ def register():
         users = mongo.db.users
         temp_verifications = mongo.db.temp_verifications  # Temporary collection for verification codes
         email = request.form['email']  # Define email here to use it throughout
-
         if not email.endswith('@ceng.metu.edu.tr'):
             error_message = 'Registration is only allowed for CENG emails.'
             return render_template('register.html', error=error_message)
@@ -148,6 +147,8 @@ def register():
                 })
             send_verification_email(email, request.form['name'], verification_code)
             session['email'] = email  # Consider using a more specific session key for email
+            session['role'] = 'authenticated_user'
+            
             return render_template('verify.html', email=email)
         
         error_message = 'That email already exists!'
@@ -309,6 +310,34 @@ def account():
         return redirect(url_for('index'))
 
     return render_template('account.html', user=user)
+
+
+@app.route('/admin')
+def admin_panel():
+    if 'email' not in session or 'role' not in session:
+        return redirect(url_for('login'))
+    if session['role'] != 'admin':
+        return "You do not have access to this page", 403  # Or redirect to another page
+    
+    users = mongo.db.users.find({})
+    items = mongo.db.items.find({})
+    return render_template('admin.html', users=users, items=items)
+
+@app.route('/delete_user/<user_id>')
+def delete_user(user_id):
+    if 'email' not in session or 'role' not in session or session['role'] != 'admin':
+        return "Unauthorized", 403
+    
+    mongo.db.users.delete_one({'_id': ObjectId(user_id)})
+    return redirect(url_for('admin_panel'))
+
+@app.route('/delete_item/<item_id>')
+def delete_item(item_id):
+    if 'email' not in session or 'role' not in session or session['role'] != 'admin':
+        return "Unauthorized", 403
+    
+    mongo.db.items.delete_one({'_id': ObjectId(item_id)})
+    return redirect(url_for('admin_panel'))
 
 if __name__ == "__main__":
     app.secret_key = 'secret_key'
