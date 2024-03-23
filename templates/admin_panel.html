@@ -63,7 +63,7 @@
             <h2>Items</h2>
             <ul>
                 {% for item in items %}
-                <li>{{ item.title }} - <a href="/delete_item/{{ item._id }}" onclick="return confirm('Are you sure you want to delete this item?');">Delete Item</a></li>
+                <li>{{ item.title }} - <a href="/delete_item_admin/{{ item._id }}" onclick="return confirm('Are you sure you want to delete this item?');">Delete Item</a></li>
                 {% endfor %}
             </ul>
         </div>

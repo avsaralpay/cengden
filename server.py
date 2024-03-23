@@ -148,7 +148,7 @@ def register():
             send_verification_email(email, request.form['name'], verification_code)
             session['email'] = email  # Consider using a more specific session key for email
             session['role'] = 'authenticated_user'
-            
+
             return render_template('verify.html', email=email)
         
         error_message = 'That email already exists!'
@@ -331,7 +331,7 @@ def delete_user(user_id):
     mongo.db.users.delete_one({'_id': ObjectId(user_id)})
     return redirect(url_for('admin_panel'))
 
-@app.route('/delete_item/<item_id>')
+@app.route('/delete_item_admin/<item_id>')
 def delete_item(item_id):
     if 'email' not in session or 'role' not in session or session['role'] != 'admin':
         return "Unauthorized", 403
