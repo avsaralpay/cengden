@@ -126,7 +126,7 @@
         </div>
         <ul class="menu">
             {% if 'email' in session %}
-                <a href="/additem">Add item</a>
+                <a href="/add_or_update_item">Add item</a>
                 <a href="/account">My Account</a>
                 <a href="/items">My Items</a>
                 <a href="/favorites">My Favorites</a>
@@ -145,7 +145,7 @@
             {% endif %}
         {% if myitems %}
             <!-- Display activate/deactivate links only for My Items view -->
-            <a href="/update_item/{{ item['_id'] }}">Update</a>
+            <a href="/add_or_update_item/{{ item['_id'] }}">Update</a>
             {% if item.get('active', True) %}
             <a href="/deactivate_item/{{ item['_id'] }}">Deactivate</a>
             {% else %}
