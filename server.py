@@ -320,7 +320,7 @@ def admin_panel():
     
     users = mongo.db.users.find({})
     items = mongo.db.items.find({})
-    return render_template('admin.html', users=users, items=items)
+    return render_template('admin_panel.html', users=users, items=items)
 
 @app.route('/delete_user/<user_id>')
 def delete_user(user_id):
