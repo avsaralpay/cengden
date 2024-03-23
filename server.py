@@ -156,7 +156,7 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/add_or_update_item',methods=['POST','GET']], defaults={'item_id': None})
+@app.route('/add_or_update_item',methods=['POST','GET'], defaults={'item_id': None})
 @app.route('/add_or_update_item/<item_id>', methods=['POST','GET'])
 def add_or_update_item(item_id=None):
     # Make sure user is logged in
