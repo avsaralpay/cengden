@@ -126,14 +126,14 @@
         </div>
         <ul class="menu">
             {% if 'email' in session %}
+                {% if session.get('role') == 'admin' %}
+                <a href="/admin">Admin Panel</a>
+                {% endif %}
                 <a href="/add_or_update_item">Add item</a>
                 <a href="/account">My Account</a>
                 <a href="/items">My Items</a>
                 <a href="/favorites">My Favorites</a>
                 <a href="/logout">Logout</a>
-                {% if session.get('role') == 'admin' %}
-                     <a href="/admin">Admin Panel</a>
-                {% endif %}
             {% else %}
                 <a href="/register">Register</a>
                 <a href="/login">Login</a>
