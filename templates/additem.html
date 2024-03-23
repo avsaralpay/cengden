@@ -104,8 +104,8 @@
 
 </head>
 <body onload="showFields()"> <!-- Ensure fields are correctly shown/hidden on page load -->
-<form action="/add_or_update_item{{ '/'+item['_id'] if item else '' }}" method="POST" class="container">
-    <h1>{{ 'Update' if item else 'Add New' }} Item</h1>
+    <form action="/add_or_update_item{{ '/' + item['_id']|string if item else '' }}" method="POST" class="container">
+        <h1>{{ 'Update' if item else 'Add New' }} Item</h1>
     <hr>
 
     <label for="category"><b>Category:</b></label>
