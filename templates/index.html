@@ -141,7 +141,7 @@
         <div class="items">
             <a href="/item/{{ item['_id'] }}">{{ item['title'] }}</a>
             {% if item.get('image_link') %}
-            <img src="{% if item.get('image_link') %}{{ item['image_link'] }}{% else %}https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png{% endif %}" alt="{{ item['title'] }}" style="width:200px;height:200px;">
+            <img src="{% if item.get('image_link') %}{{ item['image_link'] }}{% else %}https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqe9F3BwMIdCNyafmvz1kLD53pj-cYselg6qoDZcMAkA&s{% endif %}" alt="{{ item['title'] }}" style="width:200px;height:200px;">
             {% endif %}
         {% if myitems %}
             <!-- Display activate/deactivate links only for My Items view -->
