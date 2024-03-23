@@ -332,7 +332,7 @@ def delete_user(user_id):
     return redirect(url_for('admin_panel'))
 
 @app.route('/delete_item_admin/<item_id>')
-def delete_item(item_id):
+def delete_item_admin(item_id):
     if 'email' not in session or 'role' not in session or session['role'] != 'admin':
         return "Unauthorized", 403
     
