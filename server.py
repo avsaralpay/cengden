@@ -327,6 +327,10 @@ def delete_user(user_id):
     if 'email' not in session or 'role' not in session or session['role'] != 'admin':
         return "Unauthorized", 403
     
+    user = mongo.db.users.find_one({'_id': ObjectId(user_id)})
+    if user:  # If user exists
+        mongo.db.items.delete_many({'user_email': user['email']})
+
     mongo.db.users.delete_one({'_id': ObjectId(user_id)})
     return redirect(url_for('admin_panel'))
 
