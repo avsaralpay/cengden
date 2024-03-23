@@ -98,9 +98,10 @@ def login():
         users = mongo.db.users
         email = request.form.get('email')  # Use .get for safer form data access
         login_user = users.find_one({'email': email})
-
+        user_role = login_user.get('role') if login_user else None
         if login_user and bcrypt.checkpw(request.form.get('pass').encode('utf-8'), login_user['password']):
             session['email'] = email
+            session['role'] = user_role
             return redirect(url_for('index'))
         else:
             # Use a generic error message for security reasons
@@ -147,8 +148,6 @@ def register():
                 })
             send_verification_email(email, request.form['name'], verification_code)
             session['email'] = email  # Consider using a more specific session key for email
-            session['role'] = 'authenticated_user'
-
             return render_template('verify.html', email=email)
         
         error_message = 'That email already exists!'
