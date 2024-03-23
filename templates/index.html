@@ -141,7 +141,6 @@
         <div class="items">
             <a href="/item/{{ item['_id'] }}">{{ item['title'] }}</a>
             <img src="{% if item.get('image_link') %}{{ item['image_link'] }}{% else %}https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png{% endif %}" alt="{{ item['title'] }}" style="width:200px;height:200px;">
-            {% endif %}
         {% if myitems %}
             <!-- Display activate/deactivate links only for My Items view -->
             <a href="/add_or_update_item/{{ item['_id'] }}">Update</a>
