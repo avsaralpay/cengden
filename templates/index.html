@@ -131,8 +131,8 @@
                 <a href="/items">My Items</a>
                 <a href="/favorites">My Favorites</a>
                 <a href="/logout">Logout</a>
-                {% if 'admin' in session %}
-                    <a href="/admin">Admin Panel</a>
+                {% if session.get('role') == 'admin' %}
+                     <a href="/admin">Admin Panel</a>
                 {% endif %}
             {% else %}
                 <a href="/register">Register</a>
