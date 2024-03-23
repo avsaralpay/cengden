@@ -119,170 +119,187 @@
     <!-- Fields for Vehicles -->
     <div class="field vehicles" style="display:none">
         <label for="title">Title:</label>
-        <input type="text" name="title" id="title" required><br>
+        <input type="text" name="title" id="title" value="{{ item.title if item else '' }}" required>
         
         <label for="type">Type:</label>
         <input type="text" name="type" id="type" ><br>
         
         <label for="brand">Brand:</label>
-        <input type="text" name="brand" id="brand" ><br>
-        
+        <input type="text" name="brand" id="brand" value="{{ item['brand'] if item else '' }}"><br>
+
         <label for="model">Model:</label>
-        <input type="text" name="model" id="model" ><br>
-        
+        <input type="text" name="model" id="model" value="{{ item['model'] if item else '' }}"><br>
+
         <label for="year">Year:</label>
-        <input type="number" name="year" id="year" ><br>
-        
+        <input type="number" name="year" id="year" value="{{ item['year'] if item else '' }}"><br>
+
         <label for="color">Color:</label>
-        <input type="text" name="color" id="color" ><br>
-        
+        <input type="text" name="color" id="color" value="{{ item['color'] if item else '' }}"><br>
+
         <label for="engine_displacement">Engine Displacement (cc):</label>
-        <input type="number" name="engine_displacement" id="engine_displacement" ><br>
-        
+        <input type="number" name="engine_displacement" id="engine_displacement" value="{{ item['engine_displacement'] if item else '' }}"><br>
+
         <label for="fuel_type">Fuel Type:</label>
-        <select name="fuel_type" id="fuel_type" >
-            <option value="petrol">Petrol</option>
-            <option value="diesel">Diesel</option>
-            <option value="electric">Electric</option>
+        <select name="fuel_type" id="fuel_type">
+            <option value="petrol" {{ 'selected' if item and item['fuel_type'] == 'petrol' else '' }}>Petrol</option>
+            <option value="diesel" {{ 'selected' if item and item['fuel_type'] == 'diesel' else '' }}>Diesel</option>
+            <option value="electric" {{ 'selected' if item and item['fuel_type'] == 'electric' else '' }}>Electric</option>
         </select><br>
-        
+
         <label for="transmission_type">Transmission Type:</label>
-        <select name="transmission_type" id="transmission_type" >
-            <option value="automatic">Automatic</option>
-            <option value="manual">Manual</option>
+        <select name="transmission_type" id="transmission_type">
+            <option value="automatic" {{ 'selected' if item and item['transmission_type'] == 'automatic' else '' }}>Automatic</option>
+            <option value="manual" {{ 'selected' if item and item['transmission_type'] == 'manual' else '' }}>Manual</option>
         </select><br>
-        
+
         <label for="mileage">Mileage (km or miles):</label>
-        <input type="number" name="mileage" id="mileage" ><br>
-        
+        <input type="number" name="mileage" id="mileage" value="{{ item['mileage'] if item else '' }}"><br>
+
         <label for="price">Price:</label>
-        <input type="number" name="price" id="price" required><br>
-        
+        <input type="number" name="price" id="price" value="{{ item['price'] if item else '' }}" required><br>
+
         <label for="image">Image URL:</label>
-        <input type="url" name="image_link" id="image_link"><br>
-        
+        <input type="url" name="image_link" id="image_link" value="{{ item['image_link'] if item else '' }}"><br>
+
         <label for="description">Description:</label>
-        <textarea name="description" id="description" required></textarea><br>
-    </div>
+        <textarea name="description" id="description" required>{{ item['description'] if item else '' }}</textarea><br>
+</div>
     
     <!-- Fields for Computers -->
     <div class="field computers" style="display:none">
         <label for="title_computers">Title:</label>
-        <input type="text" name="title" id="title" required><br>
+        <input type="text" name="title" id="title_computers" value="{{ item['title'] if item else '' }}" required><br>
     
         <label for="type_computers">Type:</label>
-        <select name="type" id="type">
-            <option value="tablet">Tablet</option>
-            <option value="notebook">Notebook</option>
-            <option value="desktop">Desktop</option>
-            <!-- Add more types as needed -->
+        <select name="type" id="type_computers">
+            <option value="tablet" {{ 'selected' if item and item['type'] == 'tablet' else '' }}>Tablet</option>
+            <option value="notebook" {{ 'selected' if item and item['type'] == 'notebook' else '' }}>Notebook</option>
+            <option value="desktop" {{ 'selected' if item and item['type'] == 'desktop' else '' }}>Desktop</option>
         </select><br>
     
         <label for="brand_computers">Brand:</label>
-        <input type="text" name="brand" id="brand" ><br>
-        
+        <input type="text" name="brand" id="brand_computers" value="{{ item['brand'] if item else '' }}"><br>
+    
         <label for="model_computers">Model:</label>
-        <input type="text" name="model" id="model" ><br>
-        
+        <input type="text" name="model" id="model_computers" value="{{ item['model'] if item else '' }}"><br>
+    
         <label for="year_computers">Year:</label>
-        <input type="number" name="year" id="year" ><br>
-        
+        <input type="number" name="year" id="year_computers" value="{{ item['year'] if item else '' }}"><br>
+    
         <label for="processor_computers">Processor:</label>
-        <input type="text" name="processor" id="processor" ><br>
-        
+        <input type="text" name="processor" id="processor_computers" value="{{ item['processor'] if item else '' }}"><br>
+    
         <label for="ram_computers">RAM:</label>
-        <input type="text" name="ram" id="ram" ><br>
-        
+        <input type="text" name="ram" id="ram_computers" value="{{ item['ram'] if item else '' }}"><br>
+    
         <label for="storage_computers">Storage:</label>
-        <input type="text" name="storage" id="storage" ><br>
-        
+        <input type="text" name="storage" id="storage_computers" value="{{ item['storage'] if item else '' }}"><br>
+    
         <label for="graphics_card_computers">Graphics Card:</label>
-        <input type="text" name="graphics_card" id="graphics_card"><br>
-        
+        <input type="text" name="graphics_card" id="graphics_card_computers" value="{{ item['graphics_card'] if item else '' }}"><br>
+    
         <label for="os_computers">Operating System:</label>
-        <input type="text" name="operating_system" id="operating_system" ><br>
-        
+        <input type="text" name="operating_system" id="os_computers" value="{{ item['operating_system'] if item else '' }}"><br>
+    
         <label for="price_computers">Price:</label>
-        <input type="number" name="price" id="price" required><br>
-        
+        <input type="number" name="price" id="price_computers" value="{{ item['price'] if item else '' }}" required><br>
+    
         <label for="image_computers">Image URL:</label>
-        <input type="url" name="image_link" id="image_link"><br>
-        
+        <input type="url" name="image_link" id="image_link_computers" value="{{ item['image_link'] if item else '' }}"><br>
+    
         <label for="description_computers">Description:</label>
-        <textarea name="description" id="description" required></textarea><br>
+        <textarea name="description" id="description_computers" required>{{ item['description'] if item else '' }}</textarea><br>
     </div>
     
     <!-- Fields for Phones -->
     <div class="field phones" style="display:none">
         <label for="title_phones">Title:</label>
-        <input type="text" name="title" id="title" required><br>
-
+        <input type="text" name="title" id="title_phones" value="{{ item['title'] if item else '' }}" required><br>
+    
         <label for="brand_phones">Brand:</label>
-        <input type="text" name="brand" id="brand" ><br>
-
+        <input type="text" name="brand" id="brand_phones" value="{{ item['brand'] if item else '' }}"><br>
+    
         <label for="model_phones">Model:</label>
-        <input type="text" name="model" id="model" ><br>
-
+        <input type="text" name="model" id="model_phones" value="{{ item['model'] if item else '' }}"><br>
+    
         <label for="year_phones">Year:</label>
-        <input type="number" name="year" id="year" ><br>
-
+        <input type="number" name="year" id="year_phones" value="{{ item['year'] if item else '' }}"><br>
+    
         <label for="os_phones">Operating System:</label>
-        <input type="text" name="operating_system" id="operating_system" ><br>
-
+        <input type="text" name="operating_system" id="os_phones" value="{{ item['operating_system'] if item else '' }}"><br>
+    
         <label for="processor_phones">Processor:</label>
-        <input type="text" name="processor" id="processor"><br>
-
+        <input type="text" name="processor" id="processor_phones" value="{{ item['processor'] if item else '' }}"><br>
+    
         <label for="ram_phones">RAM:</label>
-        <input type="text" name="ram" id="ram" ><br>
-
+        <input type="text" name="ram" id="ram_phones" value="{{ item['ram'] if item else '' }}"><br>
+    
         <label for="storage_phones">Storage:</label>
-        <input type="text" name="storage" id="storage" ><br>
-
+        <input type="text" name="storage" id="storage_phones" value="{{ item['storage'] if item else '' }}"><br>
+    
+        <!-- Camera specifications should be dynamically added if they exist -->
         <div id="camera_specifications">
             <label>Camera Specifications:</label>
+            <!-- Dynamically add existing specifications here -->
+            {% if item and 'camera_specifications' in item %}
+                {% for spec in item['camera_specifications'] %}
+                    <div>
+                        <input type="text" name="camera_specs_type[]" value="{{ spec['Type'] }}" placeholder="Type" required>
+                        <input type="text" name="camera_specs_mp[]" value="{{ spec['MP'] }}" placeholder="MP" required>
+                    </div>
+                {% endfor %}
+            {% endif %}
             <button type="button" id="addCameraSpec">Add Camera Specification</button>
         </div>
-
+    
         <label for="battery_phones">Battery Capacity:</label>
-        <input type="text" name="battery_capacity" id="battery_capacity" ><br>
-
+        <input type="text" name="battery_capacity" id="battery_capacity_phones" value="{{ item['battery_capacity'] if item else '' }}"><br>
+    
         <label for="price_phones">Price:</label>
-        <input type="number" name="price" id="price" required><br>
-
+        <input type="number" name="price" id="price_phones" value="{{ item['price'] if item else '' }}" required><br>
+    
         <label for="image_phones">Image URL:</label>
-        <input type="url" name="image_link" id="image_link"><br>
-
+        <input type="url" name="image_link" id="image_link_phones" value="{{ item['image_link'] if item else '' }}"><br>
+    
         <label for="description_phones">Description:</label>
-        <textarea name="description" id="description" required></textarea><br>
+        <textarea name="description" id="description_phones" required>{{ item['description'] if item else '' }}</textarea><br>
     </div>
     
     <!-- Fields for Private Lessons -->
     <div class="field lessons" style="display:none">
         <label for="title_lessons">Title:</label>
-        <input type="text" name="title" id="title" required><br>
-
+        <input type="text" name="title" id="title_lessons" value="{{ item['title'] if item else '' }}" required><br>
+    
         <label for="tutor_name">Tutor Name:</label>
-        <input type="text" name="tutor_name" id="tutor_name" ><br>
-
-         <div id="lessonSpecifications">
+        <input type="text" name="tutor_name" id="tutor_name" value="{{ item['tutor_name'] if item else '' }}"><br>
+    
+        <div id="lessonSpecifications">
             <label>Lessons:</label>
-         <button type="button" id="addLesson">Add Lesson</button>
+            <!-- Dynamically add existing lessons here -->
+            {% if item and 'lessons' in item %}
+                {% for lesson in item['lessons'] %}
+                    <div>
+                        <input type="text" name="lessons[]" value="{{ lesson }}" placeholder="Lesson topic" required>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <button type="button" id="addLesson">Add Lesson</button>
         </div>
-
+    
         <label for="location">Location:</label>
-        <input type="text" name="location" id="location" ><br>
-
+        <input type="text" name="location" id="location" value="{{ item['location'] if item else '' }}"><br>
+    
         <label for="duration">Duration:</label>
-        <input type="text" name="duration" id="duration" ><br>
-
+        <input type="text" name="duration" id="duration" value="{{ item['duration'] if item else '' }}"><br>
+    
         <label for="price_lessons">Price:</label>
-        <input type="number" name="price" id="price" required><br>
-
+        <input type="number" name="price" id="price_lessons" value="{{ item['price'] if item else '' }}" required><br>
+    
         <label for="image_link">Image URL:</label>
-        <input type="url" name="image_link" id="image_link"><br>
-
+        <input type="url" name="image_link" id="image_link" value="{{ item['image_link'] if item else '' }}"><br>
+    
         <label for="description">Description:</label>
-        <textarea name="description" id="description" required></textarea><br>
+        <textarea name="description" id="description" required>{{ item['description'] if item else '' }}</textarea><br>
     </div>
     
     <button type="submit" class="btn">{{ 'Update' if item else 'Add' }} Item</button>
