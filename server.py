@@ -82,6 +82,7 @@ def delete_item(item_id):
 
     # Check if the item exists and the logged-in user is the owner
     if item and session['email'] == item.get('user_email'):
+        mongo.db.users.update_many({}, {'$pull': {'favorites': ObjectId(item_id)}})
         mongo.db.items.delete_one({'_id': ObjectId(item_id)})
 
     return redirect(url_for('index'))  # Redirect user after deletion
@@ -144,7 +145,8 @@ def register():
                     'name': request.form['name'],
                     'phone': request.form['phone'],
                     'password': bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt()),
-                    'role': 'authenticated_user'
+                    'role': 'authenticated_user',
+                    'favorites': []
                 })
             send_verification_email(email, request.form['name'], verification_code)
             session['email'] = email  # Consider using a more specific session key for email
@@ -277,6 +279,26 @@ def activate_item(item_id):
     )
     return redirect(url_for('index'))
 
+@app.route('/add_to_favorites/<item_id>', methods=['POST'])
+def add_to_favorites(item_id):
+    if 'email' not in session:
+        return redirect(url_for('login'))
+    mongo.db.users.update_one(
+        {'email': session['email']},
+        {'$addToSet': {'favorites': ObjectId(item_id)}}
+    )
+    return redirect(url_for('item_detail', item_id=item_id))
+
+@app.route('/remove_from_favorites/<item_id>', methods=['POST'])
+def remove_from_favorites(item_id):
+    if 'email' not in session:
+        return redirect(url_for('login'))
+    mongo.db.users.update_one(
+        {'email': session['email']},
+        {'$pull': {'favorites': ObjectId(item_id)}}
+    )
+    return redirect(url_for('item_detail', item_id=item_id))
+
 @app.route('/account', methods=['GET', 'POST'])
 def account():
     if 'email' not in session:
@@ -326,12 +348,15 @@ def admin_panel():
 def delete_user(user_id):
     if 'email' not in session or 'role' not in session or session['role'] != 'admin':
         return "Unauthorized", 403
-    
-    user = mongo.db.users.find_one({'_id': ObjectId(user_id)})
     if user:  # If user exists
-        mongo.db.items.delete_many({'user_email': user['email']})
+        # Find all items posted by the user
+        items = mongo.db.items.find({'user_email': user['email']})
+        item_ids = [item['_id'] for item in items]
 
-    mongo.db.users.delete_one({'_id': ObjectId(user_id)})
+        mongo.db.users.update_many({}, {'$pull': {'favorites': {'$in': item_ids}}})
+
+        mongo.db.items.delete_many({'user_email': user['email']})
+        mongo.db.users.delete_one({'_id': ObjectId(user_id)})
     return redirect(url_for('admin_panel'))
 
 @app.route('/delete_item_admin/<item_id>')
@@ -339,6 +364,7 @@ def delete_item_admin(item_id):
     if 'email' not in session or 'role' not in session or session['role'] != 'admin':
         return "Unauthorized", 403
     
+    mongo.db.users.update_many({}, {'$pull': {'favorites': ObjectId(item_id)}})
     mongo.db.items.delete_one({'_id': ObjectId(item_id)})
     return redirect(url_for('admin_panel'))
 

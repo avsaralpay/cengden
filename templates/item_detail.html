@@ -11,23 +11,45 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center; /* Ensure text is centered */
-            flex-direction: column; /* Stack items vertically */
+            text-align: center; 
+            flex-direction: column; 
         }
-        .item-container {
-            width: 100%; /* Adjust width as necessary */
+        .item-container, .item-details, .favourite, .contact-info {
+            width: 80%; 
             padding: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Optional: adds some shadow for better visibility */
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         .item-image img {
-            max-width: 100%; /* Ensure the image is responsive */
-            height: auto; /* Maintain aspect ratio */
+            max-width: 100%; 
+            height: auto; 
         }
-        .item-details {
+        .item-details p, .favourite button, .contact-info p {
+            margin: 10px 0;
+        }
+        .favourite form {
+            display: inline; /* Display forms inline for a cleaner look */
+        }
+        .favourite button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .favourite button:hover {
+            background-color: #0056b3;
+        }
+        .contact-info {
+            background-color: #f1f1f1;
+            border-radius: 5px;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
             margin-top: 20px;
-        }
-        .item-details p {
-            margin: 10px 0; /* Adds padding between each property */
         }
     </style>
 </head>
@@ -107,7 +129,20 @@
                 {% endif %}
             {% endif %}
     </div>
-    
+    </div class = favourite>
+            {% if session['email'] and item['user_email'] != session['email'] %}
+            {% if item['_id'] in user_favorites %}
+                <form action="/remove_from_favorites/{{ item['_id'] }}" method="POST">
+                    <button type="submit">Remove from Favorites</button>
+                </form>
+            {% else %}
+                <form action="/add_to_favorites/{{ item['_id'] }}" method="POST">
+                    <button type="submit">Add to Favorites</button>
+                </form>
+            {% endif %}
+        {% endif %}
+    </div>
+
     {% if user %}
     <div class="contact-info">
         <h3>Contact Information</h3>
