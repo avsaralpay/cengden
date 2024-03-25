@@ -170,6 +170,8 @@ def add_or_update_item(item_id=None):
     if item_id:
         # For update, find the existing item
         item = mongo.db.items.find_one({'_id': ObjectId(item_id), 'user_email': session['email']})
+        old_price = float(item['price']) if 'price' in item else None
+        print(old_price)
         if not item:
             return redirect(url_for('index'))  # Redirect if item not found or doesn't belong to user
     else:
@@ -192,7 +194,10 @@ def add_or_update_item(item_id=None):
             'timestamp': datetime.utcnow(),
             'active': True  # Set active status to True by default
         }
-
+        new_price = float(price) if price else None
+        print(new_price)
+        if old_price and new_price and new_price < old_price:
+            notify_price_drop(item_id, old_price, new_price)
         # Only add image link if it's provided
         if image_link:
             item_data['image_link'] = image_link
@@ -234,6 +239,35 @@ def add_or_update_item(item_id=None):
     else:
         return render_template('additem.html', item=item, is_update=is_update)
  
+def notify_price_drop(item_id, old_price, new_price):
+    users = mongo.db.users.find({'favorites': ObjectId(item_id)})
+    for user in users:
+        send_price_drop_email(user['email'], old_price, new_price)
+
+def notify_price_drop(item_id, old_price, new_price):
+    users = mongo.db.users.find({'favorites': ObjectId(item_id)})
+    for user in users:
+        send_price_drop_email(user['email'], old_price, new_price)
+
+def send_price_drop_email(email_to, old_price, new_price):
+    subject = "Price Drop Alert!"
+    html_content = f"""
+    <p>Hello,</p>
+    <p>Good news! One of your favorited items has dropped in price from {old_price} to {new_price}.</p>
+    <p>Check it out now!</p>
+    """
+    message = Mail(
+        from_email='your-email@example.com',
+        to_emails=email_to,
+        subject=subject,
+        html_content=html_content
+    )
+    try:
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        response = sg.send(message)
+        print(f"Email sent to {email_to} - Status Code: {response.status_code}")
+    except Exception as e:
+        print(f"Failed to send email to {email_to} - Error: {str(e)}")
 
 @app.route('/item/<item_id>')
 def item_detail(item_id):
