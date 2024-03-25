@@ -198,6 +198,7 @@ def add_or_update_item(item_id=None):
         new_price = float(price) if price else None
         print(new_price)
         if old_price and new_price and new_price < old_price:
+            print('Price drop detected!')
             notify_price_drop(item_id, old_price, new_price)
         # Only add image link if it's provided
         if image_link:
@@ -245,11 +246,6 @@ def notify_price_drop(item_id, old_price, new_price):
     for user in users:
         send_price_drop_email(user['email'], old_price, new_price)
 
-def notify_price_drop(item_id, old_price, new_price):
-    users = mongo.db.users.find({'favorites': ObjectId(item_id)})
-    for user in users:
-        send_price_drop_email(user['email'], old_price, new_price)
-
 def send_price_drop_email(email_to, old_price, new_price):
     subject = "Price Drop Alert!"
     html_content = f"""
@@ -258,7 +254,7 @@ def send_price_drop_email(email_to, old_price, new_price):
     <p>Check it out now!</p>
     """
     message = Mail(
-        from_email='your-email@example.com',
+        from_email='aavsaralpay@gmail.com',
         to_emails=email_to,
         subject=subject,
         html_content=html_content
