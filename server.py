@@ -249,15 +249,9 @@ def item_detail(item_id):
             }
             user_favorites = user.get('favorites', [])
             is_favorite = str(item['_id']) in user_favorites
-            return render_template('item_detail.html', item=item, user=user_info, is_favorite=is_favorite)
-        else:
-            # Handle the case where the user is not found
-            user_info = {
-                'email': 'User not found',
-                'phone': 'Not available'
-            }
+            
+    return render_template('item_detail.html', item=item, user=user_info, is_favorite=is_favorite)
 
-            return render_template('item_detail.html', item=item, user=user_info, is_favorite=False)
 
 
 @app.route('/deactivate_item/<item_id>')

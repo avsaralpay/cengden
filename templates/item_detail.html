@@ -129,9 +129,9 @@
                 {% endif %}
             {% endif %}
     </div>
-    </div class = favourite>
-            {% if session['email'] and item['user_email'] != session['email'] %}
-            {% if item['_id'] in user_favorites %}
+    <div class="favorite">
+        {% if user %}
+            {% if is_favorite %}
                 <form action="/remove_from_favorites/{{ item['_id'] }}" method="POST">
                     <button type="submit">Remove from Favorites</button>
                 </form>
