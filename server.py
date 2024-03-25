@@ -239,7 +239,7 @@ def add_or_update_item(item_id=None):
 def item_detail(item_id):
     item = mongo.db.items.find_one({'_id': ObjectId(item_id)})
     user_info = None
-
+    user_id = session.get('user_id')
     if 'email' in session:
         user = mongo.db.users.find_one({'email': item['user_email']})
         if user:  # Check if the user was found
@@ -247,6 +247,12 @@ def item_detail(item_id):
                 'email': item['user_email'],
                 'phone': user['phone']
             }
+
+            item = mongo.db.items.find_one({'_id': ObjectId(item_id)})
+            user = mongo.db.users.find_one({'_id': ObjectId(user_id)})
+            user_favorites = user.get('favorites', [])
+            is_favorite = str(item['_id']) in user_favorites
+            return render_template('item_detail.html', item=item, user = user_info,is_favorite=is_favorite)
         else:
             # Handle the case where the user is not found
             user_info = {
