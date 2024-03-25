@@ -237,20 +237,20 @@ def add_or_update_item(item_id=None):
 
 @app.route('/item/<item_id>')
 def item_detail(item_id):
-    item = mongo.db.items.find_one({'_id': ObjectId(item_id)})
+    # Convert item_id from the URL to ObjectId
+    object_item_id = ObjectId(item_id)
+    item = mongo.db.items.find_one({'_id': object_item_id})
     user_info = None
     is_favorite = False
+
     if 'email' in session:
-        user = mongo.db.users.find_one({'email': item['user_email']})
-        if user:  # Check if the user was found
-            user_info = {
-                'email': item['user_email'],
-                'phone': user['phone']
-            }
-            user_favorites = user.get('favorites', [])
-            print(user_favorites)
-            is_favorite = ObjectId(item_id) in user_favorites
-            print(is_favorite)
+        user = mongo.db.users.find_one({'email': session['email']})
+        if user:
+            user_info = {'email': user['email'], 'phone': user.get('phone')}
+            # Ensure comparison is done between similar types
+            user_favorites = [str(favorite) for favorite in user.get('favorites', [])]
+            is_favorite = item_id in user_favorites  # item_id is a string here
+
     return render_template('item_detail.html', item=item, user=user_info, is_favorite=is_favorite)
 
 
