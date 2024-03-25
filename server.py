@@ -167,6 +167,7 @@ def add_or_update_item(item_id=None):
     
     is_update = bool(item_id)  # True if updating, False if adding
     item_data = {}  # Initialize empty dict for new item or updates
+    old_price = None
     if item_id:
         # For update, find the existing item
         item = mongo.db.items.find_one({'_id': ObjectId(item_id), 'user_email': session['email']})
