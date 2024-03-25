@@ -6,19 +6,19 @@
     <title>{{ item['title'] }}</title>
     <style>
         body, html {
-            height: 100%;
             margin: 0;
+            padding: 0;
+            min-height: 100vh; /* Ensure the body takes at least the full height of the viewport */
             display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center; 
-            flex-direction: column; 
+            flex-direction: column;
         }
         .item-container, .item-details, .favourite, .contact-info {
             width: 90%; 
             padding: 20px;
             margin-bottom: 20px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-height: 90vh; /* Adjust based on content */
+            overflow-y: auto; 
         }
         .item-image img {
             max-width: 100%; 
