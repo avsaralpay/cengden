@@ -242,13 +242,16 @@ def item_detail(item_id):
     item = mongo.db.items.find_one({'_id': object_item_id})
     user_info = None
     is_favorite = False
+    if item:
+        post_user = mongo.db.users.find_one({'email': item['user_email']})
+        if post_user:
+            user_info = {'email': post_user['email'], 'phone': post_user.get('phone')}
 
     if 'email' in session:
-        user = mongo.db.users.find_one({'email': session['email']})
-        if user:
-            user_info = {'email': user['email'], 'phone': user.get('phone')}
+        session_user = mongo.db.users.find_one({'email': session['email']})
+        if session_user:
             # Ensure comparison is done between similar types
-            user_favorites = [str(favorite) for favorite in user.get('favorites', [])]
+            user_favorites = [str(favorite) for favorite in session_user.get('favorites', [])]
             is_favorite = item_id in user_favorites  # item_id is a string here
 
     return render_template('item_detail.html', item=item, user=user_info, is_favorite=is_favorite)
