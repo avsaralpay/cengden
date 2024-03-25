@@ -248,7 +248,7 @@ def item_detail(item_id):
                 'phone': user['phone']
             }
             user_favorites = user.get('favorites', [])
-            is_favorite = ObjectId(item_id) in user.get('favorites', [])
+            is_favorite = ObjectId(item_id) in user_favorites
 
     return render_template('item_detail.html', item=item, user=user_info, is_favorite=is_favorite)
 
