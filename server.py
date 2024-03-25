@@ -247,12 +247,11 @@ def notify_price_drop(item_id, old_price, new_price):
         send_price_drop_email(user['email'], old_price, new_price)
 
 def send_price_drop_email(email_to, old_price, new_price):
-    subject = "Price Drop Alert!"
+    subject = "About Your favourite item"
     html_content = f"""
     <p>Hello,</p>
-    <p>Good news! One of your favorited items has dropped in price from {old_price} to {new_price}.</p>
-    <p>Check it out now!</p>
-    """
+    <p>One of your favorited items has dropped in price from {old_price} to {new_price}.</p>
+    <p>Visit CENGden to check it out!</p>"""
     message = Mail(
         from_email='aavsaralpay@gmail.com',
         to_emails=email_to,
