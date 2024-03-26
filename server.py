@@ -60,9 +60,13 @@ def verify():
         return render_template('verify.html', error=error_message, email=email)
 
 @app.route('/')
-def index():
-    items = mongo.db.items.find({'active': True}).sort("timestamp", -1)
-    return render_template('index.html', items=list(items), myitems=False)
+@app.route('/page/<int:page>')
+def index(page=1):
+    per_page = 5  # Number of items per page
+    total_items = mongo.db.items.count_documents({'active': True})
+    total_pages = (total_items + per_page - 1) // per_page
+    items = mongo.db.items.find({'active': True}).sort("timestamp", -1).skip((page - 1) * per_page).limit(per_page)
+    return render_template('index.html', items=list(items), myitems=False, page=page, total_pages=total_pages)
 
 
 @app.route('/items')
@@ -224,7 +228,7 @@ def add_or_update_item(item_id=None):
             additional_attributes = {key: value for key, value in zip(additional_attribute_keys, additional_attribute_values) if key and value}
             if additional_attributes:
                 item_data['additional_attributes'] = additional_attributes
-                
+
         if category == 'phones':
             camera_specs = [{'Type': t.strip(), 'MP': mp.strip()} for t, mp in zip(request.form.getlist('camera_specs_type[]'), request.form.getlist('camera_specs_mp[]')) if t.strip() and mp.strip()]
             if camera_specs:
