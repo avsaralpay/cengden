@@ -9,10 +9,10 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding-bottom: 100px; /* Adjust based on your footer's height */
+            padding-bottom: 100px;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center the content */
+            align-items: center; 
         }
 
         .header {
@@ -22,8 +22,8 @@
             background-color: #007bff;
             color: #fff;
             padding: 10px;
-            width: 100%; /* Make the header full width */
-            box-sizing: border-box; /* Ensure padding is included in width */
+            width: 100%; 
+            box-sizing: border-box; 
         }
 
         .header-content {
@@ -46,8 +46,8 @@
         }
 
         .categories-container {
-            position: absolute; /* Positioned absolutely */
-            top: 60px; /* Adjust as needed */
+            position: absolute; 
+            top: 60px;
             left: 20px;
             padding: 10px;
             border-radius: 5px;
@@ -56,7 +56,7 @@
 
         .categories-label {
             position: absolute;
-            top: 20px; /* Adjust based on actual layout */
+            top: 20px; 
             left: 20px;
             color: #fff;
             padding: 5px 10px;
@@ -66,10 +66,10 @@
 
         .items {
             margin-top: 20px;
-            width: 80%; /* Adjust the width as needed */
+            width: 80%;
             display: flex;
-            flex-direction: column; /* Items top to bottom */
-            align-items: center; /* Center items */
+            flex-direction: column; 
+            align-items: center; 
         }
 
         .item {
@@ -80,7 +80,7 @@
         .pagination {
             text-align: center;
             margin-top: 10px;
-            width: 100%; /* Make the pagination full width */
+            width: 100%; 
         }
 
         .footer {
@@ -145,7 +145,6 @@
             <a href="/item/{{ item['_id'] }}">{{ item['title'] }}</a>
             <img src="{% if item.get('image_link') %}{{ item['image_link'] }}{% else %}https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png{% endif %}" alt="{{ item['title'] }}" style="width:200px;height:200px;">
         {% if myitems %}
-            <!-- Display activate/deactivate links only for My Items view -->
             <a href="/add_or_update_item/{{ item['_id'] }}">Update</a>
             {% if item.get('active', True) %}
             <a href="/deactivate_item/{{ item['_id'] }}">Deactivate</a>

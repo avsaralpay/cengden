@@ -53,7 +53,6 @@
         display: none;
     }
 
-    /* Additional styles */
 </style>
 
 <script>
@@ -62,12 +61,12 @@
         var fields = document.getElementsByClassName("field");
         for (var i = 0; i < fields.length; i++) {
             fields[i].style.display = "none";
-            disableFields(fields[i], true);  // Disable fields
+            disableFields(fields[i], true);  
         }
         var relevantFields = document.getElementsByClassName(category);
         for (var m = 0; m < relevantFields.length; m++) {
             relevantFields[m].style.display = "block";
-            disableFields(relevantFields[m], false);  // Enable fields
+            disableFields(relevantFields[m], false);  
         }
     }
 
@@ -81,12 +80,12 @@
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        showFields(); // existing functionality
+        showFields(); 
         document.getElementById('category').addEventListener('change', showFields);
 
         document.body.addEventListener('click', function(event) {
             if (event.target.id === 'addCameraSpec') {
-                event.preventDefault(); // Prevent form submission or any default action
+                event.preventDefault();
                 console.log("Adding new camera specification field");
                 var newField = document.createElement("div");
                 newField.innerHTML = '<input type="text" name="camera_specs_type[]" placeholder="Type" required> <input type="text" name="camera_specs_mp[]" placeholder="MP" required>';
@@ -103,13 +102,12 @@
 </script>
 
 </head>
-<body onload="showFields()"> <!-- Ensure fields are correctly shown/hidden on page load -->
+<body onload="showFields()"> 
     <form action="/add_or_update_item{{ '/' + item['_id']|string if item else '' }}" method="POST" class="container">
         <h1>{{ 'Update' if item else 'Add New' }} Item</h1>
     <hr>
 
     {% if not is_update %}
-    <!-- For adding new items, allow category selection -->
     <label for="category"><b>Category:</b></label>
     <select name="category" id="category" onchange="showFields()" required>
         <option value="">Select a category</option>
@@ -119,12 +117,10 @@
         <option value="lessons">Private Lessons</option>
     </select>
     {% else %}
-        <!-- For updating existing items, show category but do not allow changes -->
         <label for="category"><b>Category:</b></label>
         <input type="text" id="category_display" value="{{ item['category'] }}" disabled>
         <input type="hidden" name="category" id="category" value="{{ item['category'] }}">
     {% endif %}
-    <!-- Fields for Vehicles -->
     <div class="field vehicles" style="display:none">
         <label for="title">Title:</label>
         <input type="text" name="title" id="title" value="{{ item.title if item else '' }}" required>
@@ -173,7 +169,6 @@
         <textarea name="description" id="description" required>{{ item['description'] if item else '' }}</textarea><br>
 </div>
     
-    <!-- Fields for Computers -->
     <div class="field computers" style="display:none">
         <label for="title_computers">Title:</label>
         <input type="text" name="title" id="title_computers" value="{{ item['title'] if item else '' }}" required><br>
@@ -219,7 +214,6 @@
         <textarea name="description" id="description_computers" required>{{ item['description'] if item else '' }}</textarea><br>
     </div>
     
-    <!-- Fields for Phones -->
     <div class="field phones" style="display:none">
         <label for="title_phones">Title:</label>
         <input type="text" name="title" id="title_phones" value="{{ item['title'] if item else '' }}" required><br>
@@ -245,10 +239,8 @@
         <label for="storage_phones">Storage:</label>
         <input type="text" name="storage" id="storage_phones" value="{{ item['storage'] if item else '' }}"><br>
     
-        <!-- Camera specifications should be dynamically added if they exist -->
         <div id="camera_specifications">
             <label>Camera Specifications:</label>
-            <!-- Dynamically add existing specifications here -->
             {% if item and 'camera_specifications' in item %}
                 {% for spec in item['camera_specifications'] %}
                     <div>
@@ -273,7 +265,6 @@
         <textarea name="description" id="description_phones" required>{{ item['description'] if item else '' }}</textarea><br>
     </div>
     
-    <!-- Fields for Private Lessons -->
     <div class="field lessons" style="display:none">
         <label for="title_lessons">Title:</label>
         <input type="text" name="title" id="title_lessons" value="{{ item['title'] if item else '' }}" required><br>
@@ -283,7 +274,6 @@
     
         <div id="lessonSpecifications">
             <label>Lessons:</label>
-            <!-- Dynamically add existing lessons here -->
             {% if item and 'lessons' in item %}
                 {% for lesson in item['lessons'] %}
                     <div>
