@@ -194,10 +194,20 @@
     
         <label for="ram_computers">RAM:</label>
         <input type="text" name="ram" id="ram_computers" value="{{ item['ram'] if item else '' }}"><br>
-    
-        <label for="storage_computers">Storage:</label>
-        <input type="text" name="storage" id="storage_computers" value="{{ item['storage'] if item else '' }}"><br>
-    
+  
+        <div id="storage_computers">
+            <label>Storage Specifications:</label>
+            {% if item and 'storage' in item %}
+                {% for spec in item['storage'] %}
+                    <div>
+                        <input type="text" name="Storage_specs_type[]" value="{{ spec['Type'] }}" placeholder="Type" required>
+                        <input type="text" name="Storage_specs_size[]" value="{{ spec['Size'] }}" placeholder="Size" required>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <button type="button" id="addStorageSpec">Add Storage Specification</button>
+        </div>
+        
         <label for="graphics_card_computers">Graphics Card:</label>
         <input type="text" name="graphics_card" id="graphics_card_computers" value="{{ item['graphics_card'] if item else '' }}"><br>
     

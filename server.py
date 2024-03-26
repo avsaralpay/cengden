@@ -209,7 +209,7 @@ def add_or_update_item(item_id=None):
         category_fields = {
             'vehicles': ['type', 'brand', 'model', 'year', 'color', 'engine_displacement', 'fuel_type', 'transmission_type', 'mileage'],
             'phones': ['brand', 'model', 'year', 'operating_system', 'processor', 'ram', 'storage', 'battery_capacity'],
-            'computers': ['type', 'brand', 'model', 'year', 'processor', 'ram', 'storage', 'graphics_card', 'operating_system'],
+            'computers': ['type', 'brand', 'model', 'year', 'processor', 'ram','graphics_card', 'operating_system'],
             'lessons': ['tutor_name','location','duration']
         }
 
@@ -228,7 +228,12 @@ def add_or_update_item(item_id=None):
             clean_lesson_topics = [topic.strip() for topic in lesson_topics if topic.strip()] 
 
             if clean_lesson_topics:
-                item_data['lessons'] = clean_lesson_topics  
+                item_data['lessons'] = clean_lesson_topics
+
+        if category == 'computers':
+            computer_storages = [{'Type': t.strip(), 'Capacity': c.strip()} for t, c in zip(request.form.getlist('storage_type[]'), request.form.getlist('storage_capacity[]')) if t.strip() and c.strip()]
+            if computer_storages:
+                item_data['storage'] = computer_storages
 
         if item_id:
             mongo.db.items.update_one({'_id': ObjectId(item_id)}, {'$set': item_data})
