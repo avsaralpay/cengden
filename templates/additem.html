@@ -144,13 +144,6 @@
         
         <label for="type">Type:</label>
         <input type="text" name="type" id="type" ><br>
-
-        <div id="additional_attributes">
-            <label>Additional Attributes:</label>
-            <div id="additional_attributes_container"></div>
-            <button type="button" id="addAttribute">Add New Attribute</button>
-        </div>
-
         
         <label for="brand">Brand:</label>
         <input type="text" name="brand" id="brand" value="{{ item['brand'] if item else '' }}"><br>
@@ -182,6 +175,12 @@
 
         <label for="mileage">Mileage (km or miles):</label>
         <input type="number" name="mileage" id="mileage" value="{{ item['mileage'] if item else '' }}"><br>
+
+        <div id="additional_attributes">
+            <label>Additional Attributes:</label>
+            <div id="additional_attributes_container"></div>
+            <button type="button" id="addAttribute">Add New Attribute</button>
+        </div>
 
         <label for="price">Price:</label>
         <input type="number" name="price" id="price" value="{{ item['price'] if item else '' }}" required><br>
