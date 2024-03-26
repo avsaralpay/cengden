@@ -66,8 +66,6 @@ The application uses Flask for the backend, PyMongo for interacting with the Mon
 - Admins can delete users/items through admin panel page.
 
 
-https://api.render.com/deploy/srv-cnocs76n7f5s738dtvc0?key=DayaCeZRnZM  -- private deploy hook -- private URL to trigger a deploy for this server
-
 https://cengden-t76u.onrender.com
 
 https://github.com/avsaralpay/cengden
