@@ -218,6 +218,13 @@ def add_or_update_item(item_id=None):
             if field_value:
                 item_data[field] = field_value
 
+        if category == 'vehicles':
+            additional_attribute_keys = request.form.getlist('additional_attribute_keys[]')
+            additional_attribute_values = request.form.getlist('additional_attribute_values[]')
+            additional_attributes = {key: value for key, value in zip(additional_attribute_keys, additional_attribute_values) if key and value}
+            if additional_attributes:
+                item_data['additional_attributes'] = additional_attributes
+                
         if category == 'phones':
             camera_specs = [{'Type': t.strip(), 'MP': mp.strip()} for t, mp in zip(request.form.getlist('camera_specs_type[]'), request.form.getlist('camera_specs_mp[]')) if t.strip() and mp.strip()]
             if camera_specs:

@@ -75,6 +75,14 @@
         <div>
             {% if item['category'] == 'vehicles' %}
                 {% if item.get('type') %}<p><strong>Type:</strong> {{ item['type'] }}</p>{% endif %}
+                {% if item and 'additional_attributes' in item %}
+                    {% for key, value in item['additional_attributes'].items() %}
+                        <div>
+                            <input type="text" name="additional_attribute_keys[]" value="{{ key }}" placeholder="Attribute Key" required>
+                            <input type="text" name="additional_attribute_values[]" value="{{ value }}" placeholder="Attribute Value" required>
+                        </div>
+                    {% endfor %}
+                {% endif %}
                 {% if item.get('brand') %}<p><strong>Brand:</strong> {{ item['brand'] }}</p>{% endif %}
                 {% if item.get('model') %}<p><strong>Model:</strong> {{ item['model'] }}</p>{% endif %}
                 {% if item.get('year') %}<p><strong>Year:</strong> {{ item['year'] }}</p>{% endif %}
@@ -92,7 +100,14 @@
                 {% if item.get('year') %}<p><strong>Year:</strong> {{ item['year'] }}</p>{% endif %}
                 {% if item.get('processor') %}<p><strong>Processor:</strong> {{ item['processor'] }}</p>{% endif %}
                 {% if item.get('ram') %}<p><strong>RAM:</strong> {{ item['ram'] }}</p>{% endif %}
-                {% if item.get('storage') %}<p><strong>Storage:</strong> {{ item['storage'] }}</p>{% endif %}
+                {% if item.get('storage_computers') %}
+                <p><strong>Storage Specifications:</strong></p>
+                <ul>
+                    {% for spec in item['storage_computers'] %}
+                        <li>Type: {{ spec['Type'] }}, MP: {{ spec['Size'] }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}               
                 {% if item.get('graphics_card') %}<p><strong>Graphics Card:</strong> {{ item['graphics_card'] }}</p>{% endif %}
                 {% if item.get('operating_system') %}<p><strong>Operating System:</strong> {{ item['operating_system'] }}</p>{% endif %}
             {% endif %}

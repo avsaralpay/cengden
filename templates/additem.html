@@ -82,7 +82,16 @@
     document.addEventListener('DOMContentLoaded', function() {
         showFields(); 
         document.getElementById('category').addEventListener('change', showFields);
+        var addAttributeBtn = document.getElementById('addAttribute');
+        var attributesContainer = document.getElementById('additional_attributes_container');
 
+        addAttributeBtn.addEventListener('click', function() {
+        var newAttributeDiv = document.createElement('div');
+        newAttributeDiv.innerHTML = `
+            <input type="text" name="additional_attribute_keys[]" placeholder="Attribute Key" required>
+            <input type="text" name="additional_attribute_values[]" placeholder="Attribute Value" required>`;
+        attributesContainer.appendChild(newAttributeDiv);
+        });
         document.body.addEventListener('click', function(event) {
             if (event.target.id === 'addCameraSpec') {
                 event.preventDefault();
@@ -135,6 +144,15 @@
         
         <label for="type">Type:</label>
         <input type="text" name="type" id="type" ><br>
+
+        <div id="additional_attributes">
+            <label>Additional Attributes:</label>
+            <!-- Existing attributes will be listed here -->
+            <div id="additional_attributes_container"></div>
+            <!-- Button to add new attributes -->
+            <button type="button" id="addAttribute">Add New Attribute</button>
+        </div>
+
         
         <label for="brand">Brand:</label>
         <input type="text" name="brand" id="brand" value="{{ item['brand'] if item else '' }}"><br>
