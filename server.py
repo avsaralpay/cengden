@@ -282,9 +282,9 @@ def send_price_drop_email(email_to, old_price, new_price):
 def item_detail(item_id):
     item = mongo.db.items.find_one({'_id': ObjectId(item_id)})
     user_info = None
-    if 'email' in session and item:  # Ensure there is a logged-in user and the item exists
+    if 'email' in session and item: 
         post_user = mongo.db.users.find_one({'email': item['user_email']})
-        if post_user:  # Check if the user was found
+        if post_user:  
             user_info = {'email': post_user['email'], 'phone': post_user.get('phone', 'Phone not provided')}
     is_favorite = False
     if 'email' in session:
