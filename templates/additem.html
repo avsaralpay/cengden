@@ -141,7 +141,7 @@
         <input type="text" name="color" id="color" value="{{ item['color'] if item else '' }}"><br>
 
         <label for="engine_displacement">Engine Displacement (cc):</label>
-        <input type="number" name="engine_displacement" id="engine_displacement" value="{{ item['engine_displacement'] if item else '' }}"><br>
+        <input type="number" name="engine_displacement" id="engine_displacement" value="{{ item['engine_displacement'] if item else '' }}" step="0.1"><br>
 
         <label for="fuel_type">Fuel Type:</label>
         <select name="fuel_type" id="fuel_type">
