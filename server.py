@@ -101,8 +101,16 @@ def delete_item(item_id):
 
 @app.route('/category/<category_name>')
 def category(category_name):
-    items = mongo.db.items.find({'category': category_name, 'active': True}).sort([('timestamp', -1)])
-    return render_template('category.html', items=list(items), category=category_name)
+    page = request.args.get('page', 1, type=int)
+    per_page = 5  
+    offset = (page - 1) * per_page
+
+    total_items = mongo.db.items.count_documents({'category': category_name, 'active': True})
+    total_pages = (total_items + per_page - 1) // per_page 
+    
+    items = mongo.db.items.find({'category': category_name, 'active': True}).skip(offset).limit(per_page).sort([('timestamp', -1)])
+
+    return render_template('category.html', items=list(items), category=category_name, current_page=page, total_pages=total_pages)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
