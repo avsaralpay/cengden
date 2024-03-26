@@ -75,14 +75,7 @@
         <div>
             {% if item['category'] == 'vehicles' %}
                 {% if item.get('type') %}<p><strong>Type:</strong> {{ item['type'] }}</p>{% endif %}
-                {% if item and 'additional_attributes' in item %}
-                    {% for key, value in item['additional_attributes'].items() %}
-                        <div>
-                            <input type="text" name="additional_attribute_keys[]" value="{{ key }}" placeholder="Attribute Key" required>
-                            <input type="text" name="additional_attribute_values[]" value="{{ value }}" placeholder="Attribute Value" required>
-                        </div>
-                    {% endfor %}
-                {% endif %}
+               
                 {% if item.get('brand') %}<p><strong>Brand:</strong> {{ item['brand'] }}</p>{% endif %}
                 {% if item.get('model') %}<p><strong>Model:</strong> {{ item['model'] }}</p>{% endif %}
                 {% if item.get('year') %}<p><strong>Year:</strong> {{ item['year'] }}</p>{% endif %}
@@ -91,6 +84,16 @@
                 {% if item.get('fuel_type') %}<p><strong>Fuel Type:</strong> {{ item['fuel_type'] }}</p>{% endif %}
                 {% if item.get('transmission_type') %}<p><strong>Transmission Type:</strong> {{ item['transmission_type'] }}</p>{% endif %}
                 {% if item.get('mileage') %}<p><strong>Mileage:</strong> {{ item['mileage'] }}</p>{% endif %}
+
+                {% if item and 'additional_attributes' in item %}
+                {% for key, value in item['additional_attributes'].items() %}
+                    <div>
+                        <input type="text" name="additional_attribute_keys[]" value="{{ key }}" placeholder="Attribute Key" required>
+                        <input type="text" name="additional_attribute_values[]" value="{{ value }}" placeholder="Attribute Value" required>
+                    </div>
+                {% endfor %}
+                {% endif %}
+
             {% endif %}
 
             {% if item['category'] == 'computers' %}
