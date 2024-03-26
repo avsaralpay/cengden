@@ -72,6 +72,19 @@ def my_items():
     items = mongo.db.items.find({'user_email': session['email']}).sort("timestamp", -1)
     return render_template('index.html', items=list(items), myitems=True)
 
+@app.route('/favorites')
+def favorites():
+    if 'email' not in session:
+        return redirect(url_for('login'))  # Ensure user is logged in
+
+    user = mongo.db.users.find_one({'email': session['email']})
+    favorite_ids = user.get('favorites', [])
+    favorite_object_ids = [ObjectId(id) for id in favorite_ids]
+    # Fetch the favorite items based on their IDs
+    favorite_items = mongo.db.items.find({'_id': {'$in': favorite_object_ids}})
+
+    return render_template('index.html', items=list(favorite_items), viewing_favorites=True)
+
 @app.route('/delete_item/<item_id>')
 def delete_item(item_id):
     if 'email' not in session:
