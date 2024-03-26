@@ -280,21 +280,17 @@ def send_price_drop_email(email_to, old_price, new_price):
 
 @app.route('/item/<item_id>')
 def item_detail(item_id):
-    object_item_id = ObjectId(item_id)
-    item = mongo.db.items.find_one({'_id': object_item_id})
+    item = mongo.db.items.find_one({'_id': ObjectId(item_id)})
     user_info = None
-    is_favorite = False
-    if item:
+    if 'email' in session and item:  # Ensure there is a logged-in user and the item exists
         post_user = mongo.db.users.find_one({'email': item['user_email']})
-        if post_user:
-            user_info = {'email': post_user['email'], 'phone': post_user.get('phone')}
-
+        if post_user:  # Check if the user was found
+            user_info = {'email': post_user['email'], 'phone': post_user.get('phone', 'Phone not provided')}
+    is_favorite = False
     if 'email' in session:
-        session_user = mongo.db.users.find_one({'email': session['email']})
-        if session_user:
-            user_favorites = [str(favorite) for favorite in session_user.get('favorites', [])]
-            is_favorite = item_id in user_favorites  
-
+        logged_in_user = mongo.db.users.find_one({'email': session['email']})
+        if logged_in_user and item:
+            is_favorite = ObjectId(item_id) in logged_in_user.get('favorites', [])
     return render_template('item_detail.html', item=item, user=user_info, is_favorite=is_favorite)
 
 
