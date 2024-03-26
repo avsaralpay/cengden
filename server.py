@@ -231,7 +231,7 @@ def add_or_update_item(item_id=None):
                 item_data['lessons'] = clean_lesson_topics
 
         if category == 'computers':
-            computer_storages = [{'Type': t.strip(), 'Size': c.strip()} for t, s in zip(request.form.getlist('Storage_specs_type[]'), request.form.getlist('Storage_specs_size[]')) if t.strip() and s.strip()]
+            computer_storages = [{'Type': t.strip(), 'Size': s.strip()} for t, s in zip(request.form.getlist('Storage_specs_type[]'), request.form.getlist('Storage_specs_size[]')) if t.strip() and s.strip()]
             if computer_storages:
                 item_data['storage_computers'] = computer_storages
 
