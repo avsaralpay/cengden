@@ -90,7 +90,15 @@
                 var newField = document.createElement("div");
                 newField.innerHTML = '<input type="text" name="camera_specs_type[]" placeholder="Type" required> <input type="text" name="camera_specs_mp[]" placeholder="MP" required>';
                 document.getElementById('camera_specifications').appendChild(newField);
-            } else if (event.target.id === 'addLesson') {
+            }
+            else if ( event.target.id === 'addStorageSpec'){
+                event.preventDefault();
+                console.log("Adding new storage specification field");
+                var newField = document.createElement("div");
+                newField.innerHTML = '<input type="text" name="Storage_specs_type[]" placeholder="Type" required> <input type="text" name="Storage_specs_size[]" placeholder="Size" required>';
+                document.getElementById('storage_computers').appendChild(newField);
+            }
+            else if (event.target.id === 'addLesson') {
                 event.preventDefault();
                 console.log("Adding new lesson field");
                 var newField = document.createElement("div");
