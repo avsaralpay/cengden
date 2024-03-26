@@ -55,18 +55,19 @@ Student id : 2171254
 
 ## Additional Information
 
-The application uses Flask for the backend, PyMongo for interacting with the MongoDB database, bcrypt for password hashing, and SendGrid for sending emails.
+The application uses Flask for the backend, PyMongo for interacting with the MongoDB database, bcrypt for password hashing, and SendGrid for sending emails. Python is used for my convenience and extensive modules for web application.
 
-I registered e1111111@ceng.metu.edu.tr as admin and one can sign in entering password 11111111
-I registered e2222222@ceng.metu.edu.tr as authenticated user and one can sign in entering password 22222222
-User can update/delete/reactivate and deactivate theirs posts through my items page.
-User can add an item through add item page.
-User can add item to favorites in item detail page, display favourited items through my favorites page.
-User can update account setting in my account page.
-Admins can delete users/items through admin panel page.
+- I registered e1111111@ceng.metu.edu.tr as admin and one can sign in entering password 11111111.
+- I registered e2222222@ceng.metu.edu.tr as authenticated user and one can sign in entering password 22222222.
+- User can update/delete/reactivate and deactivate theirs posts through my items page.
+- User can add an item through add item page.
+- User can add item to favorites in item detail page, display favourited items through my favorites page.
+- User can update account setting in my account page.
+- Admins can delete users/items through admin panel page.
 
 
-https://api.render.com/deploy/srv-cnocs76n7f5s738dtvc0?key=DayaCeZRnZM  -- private deploy hook  
+https://api.render.com/deploy/srv-cnocs76n7f5s738dtvc0?key=DayaCeZRnZM  -- private deploy hook -- private URL to trigger a deploy for this server
+
 https://cengden-t76u.onrender.com
 
 https://github.com/avsaralpay/cengden
